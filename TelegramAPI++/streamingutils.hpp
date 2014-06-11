@@ -12,5 +12,10 @@ public:
     static void writeLong(int64_t, std::vector<char>*);
     static void writeByteArray(char*, int, std::vector<char>*);
     static void writeVector(std::vector<char>*, std::vector<char>*);
+
+    static unsigned char readByte(std::vector<char>*);
+    static int readInteger(std::vector<char>*);
+    static int64_t readLong(std::vector<char>*);
+    static void readByteArray(char*, int, std::vector<char>*);
 };
 

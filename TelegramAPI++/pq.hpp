@@ -12,8 +12,8 @@ public:
 
     virtual int getClassId();
     virtual void serializeBody(std::vector<char>*);
+    virtual void deserializeBody(std::vector<char>*);
 private:
     char _nonce[16];
-
 };
 

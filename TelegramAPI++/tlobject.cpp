@@ -13,3 +13,15 @@ void TLObject::serialize(std::vector<char>* vector)
 
     serializeBody(vector);
 }
+
+void TLObject::deserialize(std::vector<char>* vector)
+{
+    if (getClassId() != 0)
+    {
+        int classId = StreamingUtils::readInteger(vector);
+        if (classId != getClassId())
+            return;
+    }
+
+    deserializeBody(vector);
+}
