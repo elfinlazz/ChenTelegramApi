@@ -35,45 +35,8 @@ int PlainConnection::connect()
 
     if (error)
         return CONN_FAILED;
-
-    // handshake with abridged protocol
-    int buf[1] = { 0xEF };
-    _socket.write_some(boost::asio::buffer(buf), error);
-
+    
     return CONN_SUCCESS;
-}
-
-void PlainConnection::sendPQReq(PQReq* obj)
-{
-    std::vector<char> packet;
-    std::vector<char> objPacket;
-    obj->serializePQRequest(&objPacket);
-    int len = objPacket.size() / 4;
-
-    if (len >= 0x7F)
-    {
-        StreamingUtils::writeByte(0x7F, &packet);
-        StreamingUtils::writeByte(len & 0xFF, &packet);
-        StreamingUtils::writeByte((len >> 8) & 0xFF, &packet);
-        StreamingUtils::writeByte((len >> 16) & 0xFF, &packet);
-    }
-    else
-    {
-        StreamingUtils::writeByte(len, &packet);
-    }
-
-    StreamingUtils::writeVector(&objPacket, &packet);
-    boost::system::error_code error;
-
-    write(_socket, boost::asio::buffer(packet), error);
-
-    std::cout << error.message() << std::endl;
-
-    for (;;)
-    {
-        boost::array<char, 256> buf;
-        size_t len = _socket.read_some(boost::asio::buffer(buf));
-    }
 }
 
 void PlainConnection::send(TLObject* obj)
@@ -83,6 +46,12 @@ void PlainConnection::send(TLObject* obj)
     obj->serialize(&objPacket);
     int len = objPacket.size() / 4;
 
+    if (!_fsent)
+    {
+        StreamingUtils::writeByte(0xEF, &packet);
+        _fsent = true;
+    }
+
     if (len >= 0x7F)
     {
         StreamingUtils::writeByte(0x7F, &packet);
@@ -97,11 +66,18 @@ void PlainConnection::send(TLObject* obj)
 
     StreamingUtils::writeVector(&objPacket, &packet);
 
-    _socket.write_some(boost::asio::buffer(packet));
+    boost::system::error_code error;
+    _socket.write_some(boost::asio::buffer(packet), error);
 
     for (;;)
     {
         boost::array<char, 256> buf;
-        size_t len = _socket.read_some(boost::asio::buffer(buf));
+        size_t len = _socket.read_some(boost::asio::buffer(buf), error);
+        if (error && error == boost::asio::error::eof)
+            break;
+        else if (error)
+            std::cout << error.message() << std::endl;
+
+        std::cout.write(buf.data(), len);
     }
 }

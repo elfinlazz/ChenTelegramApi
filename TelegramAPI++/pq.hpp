@@ -1,20 +1,19 @@
 #pragma once
 
-#include <iostream>
 #include <vector>
 
 #include "tlobject.hpp"
-#include "pq.hpp"
 
-class PQReq : public TLObject
+class PQ : public TLObject
 {
 public:
-    PQReq();
-    ~PQReq();
+    PQ();
+    ~PQ();
 
     virtual int getClassId();
     virtual void serializeBody(std::vector<char>*);
 private:
-    PQ _pq;
+    char _nonce[16];
+
 };
 

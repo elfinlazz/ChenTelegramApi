@@ -36,6 +36,9 @@
     <ClCompile Include="connectioninfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pq.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="authorizer.hpp">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="connectioninfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pq.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 
 #include "plainconnection.hpp"
 #include "pqreq.hpp"
+#include "streamingutils.hpp"
 
 Authorizer::Authorizer(std::vector<ConnectionInfo>* infos)
 {
@@ -27,7 +28,7 @@ int Authorizer::doAuth(ConnectionInfo* info)
     int conres = connection.connect();
     PQReq req;
 
-    connection.sendPQReq(&req);
+    connection.send(&req);
 
     return AUTH_SUCCESS;
 }

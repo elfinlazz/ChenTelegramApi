@@ -7,6 +7,9 @@ TLObject::~TLObject()
 
 void TLObject::serialize(std::vector<char>* vector)
 {
-    StreamingUtils::writeInteger(getClassId(), vector);
+    int classId = getClassId();
+    if (classId != 0)
+        StreamingUtils::writeInteger(classId, vector);
+
     serializeBody(vector);
 }

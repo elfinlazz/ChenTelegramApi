@@ -18,12 +18,12 @@ public:
     ~PlainConnection();
 
     int connect();
-    void sendPQReq(PQReq*);
     void send(TLObject*);
 
 private:
     ConnectionInfo* _info;
     boost::asio::io_service _io_service;
     tcp::socket _socket;
+    bool _fsent = false;
 };
 

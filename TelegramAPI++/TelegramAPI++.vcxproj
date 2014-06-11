@@ -18,7 +18,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -73,6 +73,7 @@
     <ClCompile Include="connectioninfo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="plainconnection.cpp" />
+    <ClCompile Include="pq.cpp" />
     <ClCompile Include="pqreq.cpp" />
     <ClCompile Include="streamingutils.cpp" />
     <ClCompile Include="tlobject.cpp" />
@@ -81,6 +82,7 @@
     <ClInclude Include="authorizer.hpp" />
     <ClInclude Include="connectioninfo.hpp" />
     <ClInclude Include="plainconnection.hpp" />
+    <ClInclude Include="pq.hpp" />
     <ClInclude Include="pqreq.hpp" />
     <ClInclude Include="streamingutils.hpp" />
     <ClInclude Include="tlobject.hpp" />
