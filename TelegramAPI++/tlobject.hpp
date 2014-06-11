@@ -5,7 +5,7 @@
 class TLObject
 {
 public:
-    virtual ~TLObject();
+    virtual ~TLObject() = 0;
     void serialize(std::vector<char>*);
 
 private:

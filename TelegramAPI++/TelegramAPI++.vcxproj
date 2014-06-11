@@ -75,8 +75,10 @@
     <ClCompile Include="plainconnection.cpp" />
     <ClCompile Include="pq.cpp" />
     <ClCompile Include="pqreq.cpp" />
+    <ClCompile Include="pqres.cpp" />
     <ClCompile Include="streamingutils.cpp" />
     <ClCompile Include="tlobject.cpp" />
+    <ClCompile Include="tlreqpqmethod.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="authorizer.hpp" />
@@ -84,8 +86,11 @@
     <ClInclude Include="plainconnection.hpp" />
     <ClInclude Include="pq.hpp" />
     <ClInclude Include="pqreq.hpp" />
+    <ClInclude Include="pqres.hpp" />
     <ClInclude Include="streamingutils.hpp" />
+    <ClInclude Include="tlmethod.hpp" />
     <ClInclude Include="tlobject.hpp" />
+    <ClInclude Include="tlreqpqmethod.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

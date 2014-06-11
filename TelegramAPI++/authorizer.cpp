@@ -12,13 +12,12 @@ Authorizer::Authorizer(std::vector<ConnectionInfo>* infos)
 void Authorizer::attemptAuth()
 {
     std::vector<ConnectionInfo>::iterator it = _infos->begin();
+    int res = AUTH_FAILED;
 
-    for (;;)
-    {
-        int res = doAuth(&*it++);
-        if (it == _infos->end())
-            break;
-    }
+    while (it != _infos->end() && res != AUTH_SUCCESS)
+         res = doAuth(&*it++);
+
+    std::cout << "Auth succeeded" << std::endl;
 }
 
 int Authorizer::doAuth(ConnectionInfo* info)

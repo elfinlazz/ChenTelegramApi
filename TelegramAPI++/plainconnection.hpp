@@ -5,6 +5,7 @@
 #include "connectioninfo.hpp"
 #include "tlobject.hpp"
 #include "pqreq.hpp"
+#include "tlmethod.hpp"
 
 using boost::asio::ip::tcp;
 
@@ -19,6 +20,9 @@ public:
 
     int connect();
     void send(TLObject*);
+
+    template<class T>
+    T executeMethod(TLMethod<T>*);
 
 private:
     ConnectionInfo* _info;

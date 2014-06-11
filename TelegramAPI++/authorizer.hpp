@@ -5,8 +5,8 @@
 
 #include "connectioninfo.hpp"
 
-#define AUTH_SUCCESS 0x00;
-#define AUTH_FAILED 0x01;
+#define AUTH_SUCCESS 0x00
+#define AUTH_FAILED 0x01
 
 class Authorizer
 {

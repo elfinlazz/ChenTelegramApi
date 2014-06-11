@@ -39,6 +39,12 @@
     <ClCompile Include="pq.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tlreqpqmethod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pqres.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="authorizer.hpp">
@@ -60,6 +66,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pq.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tlmethod.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tlreqpqmethod.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pqres.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
