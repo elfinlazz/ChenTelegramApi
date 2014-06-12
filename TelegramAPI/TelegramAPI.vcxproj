@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0EA78D0C-1C0F-430A-BA48-4098D4195C79}</ProjectGuid>
     <RootNamespace>TelegramAPI</RootNamespace>
+    <ProjectName>TelegramAPI</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
