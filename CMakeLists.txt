@@ -5,6 +5,7 @@ set(SOURCE_FILES
 # API #
 src/api/authentication/authenticationstate.hpp
 src/api/authentication/authorizer.hpp src/api/authentication/authorizer.cpp
+src/api/authentication/pqsolver.hpp src/api/authentication/pqsolver.cpp
 src/api/connection/connectionstate.hpp
 src/api/connection/connectioninfo.hpp
 src/api/connection/plainconnection.hpp src/api/connection/plainconnection.cpp

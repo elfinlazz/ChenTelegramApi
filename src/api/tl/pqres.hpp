@@ -19,7 +19,7 @@ public:
 
     char nonce[16] = {0};
     char serverNonce[16] = {0};
-    char pq[8] = {0};
+    uint64_t pq = 0;
     TLVector vector;
 };
 

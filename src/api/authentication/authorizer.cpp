@@ -1,7 +1,10 @@
 #include "authorizer.hpp"
 
+#include <boost/multiprecision/miller_rabin.hpp>
+
 #include "../connection/plainconnection.hpp"
 #include "../tl/tlreqpqmethod.hpp"
+#include "pqsolver.hpp"
 
 Authorizer::Authorizer(std::vector<ConnectionInfo> *infoList)
 {
@@ -29,6 +32,9 @@ AuthenticationState Authorizer::doAuth(ConnectionInfo *info)
 
     TLReqPQMethod method;
     PQRes *res = connection.executeMethod(&method);
+    PQSolver solver;
+    int64_t p, q;
+    solver.solvePQ(res->pq, &p, &q);
 
     return AuthenticationState::AUTHENTICATED;
 }
