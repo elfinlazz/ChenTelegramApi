@@ -82,3 +82,26 @@ void StreamingUtils::readByteArray(char *target, int count, std::vector<char> *v
     for (int i = 0; i < count; i++)
         target[i] = readByte(vector);
 }
+
+void StreamingUtils::readTLByteArray(char *target, std::vector<char> *vector)
+{
+    int count = readByte(vector);
+    int startOffset = 1;
+    if (count > 254)
+    {
+        count = readByte(vector);
+        count += readByte(vector) << 8;
+        count += readByte(vector) << 16;
+        startOffset = 4;
+    }
+
+    readByteArray(target, count, vector);
+
+    int offset = (count + startOffset) % 4;
+    if (offset != 0)
+    {
+        int offsetCount = 4 - offset;
+        for (int i = 0; i < offsetCount; ++i)
+            readByte(vector);
+    }
+}

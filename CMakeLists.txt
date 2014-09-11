@@ -16,6 +16,7 @@ src/api/tl/pqres.hpp src/api/tl/pqres.cpp
 src/api/tl/tlmethod.hpp
 src/api/tl/tlobject.hpp src/api/tl/tlobject.cpp
 src/api/tl/tlreqpqmethod.hpp src/api/tl/tlreqpqmethod.cpp
+src/api/tl/tlvector.hpp src/api/tl/tlvector.cpp
 
 # UTILS #
 src/api/utils/streamingutils.hpp src/api/utils/streamingutils.cpp

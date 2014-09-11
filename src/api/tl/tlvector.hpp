@@ -9,5 +9,11 @@ public:
 
     ~TLVector();
 
-    std::vector<long> contents;
+    std::vector<int64_t> contents;
+private:
+    virtual int getClassId() override;
+
+    virtual void serializeBody(std::vector<char> *vector) override;
+
+    virtual void deserializeBody(std::vector<char> *vector) override;
 };

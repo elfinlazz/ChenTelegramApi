@@ -24,5 +24,7 @@ public:
     static int64_t readLong(std::vector<char> *);
 
     static void readByteArray(char *, int, std::vector<char> *);
+
+    static void readTLByteArray(char *target, std::vector<char> *vector);
 };
 
