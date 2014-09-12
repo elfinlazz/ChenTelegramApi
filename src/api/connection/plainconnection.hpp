@@ -22,8 +22,8 @@ public:
 
     void send(TLObject *);
 
-    template<class T>
-    T *executeMethod(TLMethod<T> *method)
+    template<class TSend, class TRecv>
+    TRecv *executeMethod(TLMethod<TSend, TRecv> *method)
     {
         send(method->sendObject);
         size_t reqLen = method->requiredLength;

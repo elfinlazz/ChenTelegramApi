@@ -17,8 +17,8 @@ public:
 
     virtual void deserializeBody(std::vector<char> *);
 
-    char nonce[16] = {0};
-    char serverNonce[16] = {0};
+    char nonce[16];
+    char serverNonce[16];
     uint64_t pq = 0;
     TLVector vector;
 };

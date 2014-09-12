@@ -2,7 +2,7 @@
 
 #include "tlobject.hpp"
 
-template<class T>
+template<class TSend, class TRecv>
 class TLMethod
 {
 public:
@@ -14,7 +14,7 @@ public:
     {
     }
 
-    TLObject* sendObject;
-    T* recvObject;
+    TSend* sendObject;
+    TRecv* recvObject;
     size_t requiredLength;
 };

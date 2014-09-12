@@ -5,6 +5,9 @@
 #include "../connection/plainconnection.hpp"
 #include "../tl/tlreqpqmethod.hpp"
 #include "pqsolver.hpp"
+#include "../tl/pqinnerdata.hpp"
+#include "../utils/randomutils.hpp"
+#include "../tl/tlreqdhmethod.hpp"
 
 Authorizer::Authorizer(std::vector<ConnectionInfo> *infoList)
 {
@@ -30,11 +33,19 @@ AuthenticationState Authorizer::doAuth(ConnectionInfo *info)
     if (result == ConnectionState::FAILED)
         return AuthenticationState::REJECTED;
 
-    TLReqPQMethod method;
-    PQRes *res = connection.executeMethod(&method);
+    TLReqPQMethod reqPQMethod;
+    PQRes *res = connection.executeMethod(&reqPQMethod);
     PQSolver solver;
     int64_t p, q;
     solver.solvePQ(res->pq, &p, &q);
+    //TLReqDHMethod reqDHMethod;
+    //reqDHMethod.sendObject->pq = res->pq;
+    //reqDHMethod.sendObject->p = p;
+    //reqDHMethod.sendObject->q = q;
+    //reqDHMethod.sendObject->nonce = res->nonce;
+    //reqDHMethod.sendObject->serverNonce = res->serverNonce;
+    //RandomUtils::nextBytes(reqDHMethod.sendObject->newNonce, 32);
+    //ReqDHParams params = connection.executeMethod(&reqDHMethod);
 
     return AuthenticationState::AUTHENTICATED;
 }

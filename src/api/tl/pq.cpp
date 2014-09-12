@@ -1,12 +1,11 @@
-#include <stdlib.h>
 #include "pq.hpp"
 
 #include "../utils/streamingutils.hpp"
+#include "../utils/randomutils.hpp"
 
 PQ::PQ()
 {
-    for (int i = 0; i < 16; ++i)
-        nonce[i] = (char) (rand() % 256);
+    RandomUtils::nextBytes(nonce, 16);
 }
 
 void PQ::serializeBody(std::vector<char> *vector)

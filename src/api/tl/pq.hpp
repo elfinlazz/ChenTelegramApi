@@ -17,7 +17,6 @@ public:
 
     virtual void deserializeBody(std::vector<char> *);
 
-private:
     char nonce[16];
 };
 

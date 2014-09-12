@@ -4,7 +4,7 @@
 #include "pqreq.hpp"
 #include "pqres.hpp"
 
-class TLReqPQMethod : public TLMethod<PQRes>
+class TLReqPQMethod : public TLMethod<PQReq, PQRes>
 {
 public:
     TLReqPQMethod();

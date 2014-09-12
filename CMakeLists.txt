@@ -12,15 +12,19 @@ src/api/connection/plainconnection.hpp src/api/connection/plainconnection.cpp
 
 # TL #
 src/api/tl/pq.hpp src/api/tl/pq.cpp
+src/api/tl/pqinnerdata.hpp src/api/tl/pqinnerdata.cpp
 src/api/tl/pqreq.hpp src/api/tl/pqreq.cpp
 src/api/tl/pqres.hpp src/api/tl/pqres.cpp
+src/api/tl/reqdhparams.hpp src/api/tl/reqdhparams.cpp
 src/api/tl/tlmethod.hpp
 src/api/tl/tlobject.hpp src/api/tl/tlobject.cpp
+src/api/tl/tlreqdhmethod.hpp src/api/tl/tlreqdhmethod.cpp
 src/api/tl/tlreqpqmethod.hpp src/api/tl/tlreqpqmethod.cpp
 src/api/tl/tlvector.hpp src/api/tl/tlvector.cpp
 
 # UTILS #
 src/api/utils/streamingutils.hpp src/api/utils/streamingutils.cpp
+src/api/utils/randomutils.hpp src/api/utils/randomutils.cpp
 
 src/main.cpp)
 
