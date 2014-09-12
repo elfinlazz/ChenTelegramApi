@@ -16,5 +16,4 @@ public:
 
     TSend* sendObject;
     TRecv* recvObject;
-    size_t requiredLength;
 };

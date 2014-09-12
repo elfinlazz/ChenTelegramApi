@@ -8,6 +8,7 @@
 #include "../tl/tlobject.hpp"
 #include "../tl/pqreq.hpp"
 #include "../tl/tlmethod.hpp"
+#include "../utils/socketutils.hpp"
 
 using boost::asio::ip::tcp;
 
@@ -26,23 +27,17 @@ public:
     TRecv *executeMethod(TLMethod<TSend, TRecv> *method)
     {
         send(method->sendObject);
-        size_t reqLen = method->requiredLength;
         std::vector<char> recvVector;
 
-        for (; ;)
+        int headerLen = (int) SocketUtils::readByte(&socket);
+        if (headerLen == 0x7F)
         {
-            boost::system::error_code error;
-            boost::array<char, 256> buf;
-            size_t len = socket.read_some(boost::asio::buffer(buf), error);
-            for (int i = 0; i < len; i++)
-                recvVector.push_back(buf[i]);
-
-            if ((error && error == boost::asio::error::eof) || len == reqLen)
-                break;
-            else if (error)
-                std::cout << error.message() << std::endl;
-
+            headerLen = SocketUtils::readByte(&socket);
+            headerLen += SocketUtils::readByte(&socket) << 8;
+            headerLen += SocketUtils::readByte(&socket) << 16;
         }
+        int len = headerLen * 4;
+        SocketUtils::readByteArray(&recvVector, len, &socket);
 
         method->receiveObject(&recvVector);
         return method->recvObject;

@@ -24,6 +24,7 @@ src/api/tl/tlvector.hpp src/api/tl/tlvector.cpp
 
 # UTILS #
 src/api/utils/streamingutils.hpp src/api/utils/streamingutils.cpp
+src/api/utils/socketutils.hpp src/api/utils/socketutils.cpp
 src/api/utils/randomutils.hpp src/api/utils/randomutils.cpp
 
 src/main.cpp)

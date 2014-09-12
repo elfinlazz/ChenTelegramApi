@@ -23,12 +23,7 @@ void PQReq::serializeBody(std::vector<char> *vector)
 
 void PQReq::deserializeBody(std::vector<char> *vector)
 {
-    int64_t authId = StreamingUtils::readLong(vector);
-    int64_t unix = StreamingUtils::readLong(vector);
-    int pqsize = StreamingUtils::readInteger(vector);
-
-    PQ pq;
-    pq.deserialize(vector);
+    // send only
 }
 
 int PQReq::getClassId()
