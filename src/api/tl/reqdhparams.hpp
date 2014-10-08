@@ -9,10 +9,10 @@ public:
 
     ~ReqDHParams();
 
-    char nonce[16];
-    char serverNonce[16];
+    uint8_t nonce[16];
+    uint8_t serverNonce[16];
     int64_t p;
     int64_t q;
     int64_t fingerprint;
-    char encData[260];
+    uint8_t encData[260];
 };

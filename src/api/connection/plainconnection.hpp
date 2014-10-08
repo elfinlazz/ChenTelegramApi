@@ -27,7 +27,7 @@ public:
     TRecv *executeMethod(TLMethod<TSend, TRecv> *method)
     {
         send(method->sendObject);
-        std::vector<char> recvVector;
+        std::vector<uint8_t> recvVector;
 
         int headerLen = (int) SocketUtils::readByte(&socket);
         if (headerLen == 0x7F)

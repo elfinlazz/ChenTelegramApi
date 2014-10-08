@@ -7,24 +7,24 @@
 class StreamingUtils
 {
 public:
-    static void writeByte(char, std::vector<char> *);
+    static void writeByte(uint8_t, std::vector<uint8_t> *);
 
-    static void writeInteger(int, std::vector<char> *);
+    static void writeInteger(uint32_t, std::vector<uint8_t> *);
 
-    static void writeLong(int64_t, std::vector<char> *);
+    static void writeLong(uint64_t, std::vector<uint8_t> *);
 
-    static void writeByteArray(char *, int, std::vector<char> *);
+    static void writeByteArray(uint8_t *, uint32_t, std::vector<uint8_t> *);
 
-    static void writeVector(std::vector<char> *, std::vector<char> *);
+    static void writeVector(std::vector<uint8_t> *, std::vector<uint8_t> *);
 
-    static unsigned char readByte(std::vector<char> *);
+    static uint8_t readByte(std::vector<uint8_t> *);
 
-    static int readInteger(std::vector<char> *);
+    static uint32_t readInteger(std::vector<uint8_t> *);
 
-    static int64_t readLong(std::vector<char> *);
+    static uint64_t readLong(std::vector<uint8_t> *);
 
-    static void readByteArray(char *, int, std::vector<char> *);
+    static void readByteArray(uint8_t *, uint32_t, std::vector<uint8_t> *);
 
-    static void readTLByteArray(char *target, std::vector<char> *vector);
+    static void readTLByteArray(uint8_t *target, std::vector<uint8_t> *vector);
 };
 

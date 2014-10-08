@@ -8,7 +8,7 @@ using boost::asio::ip::tcp;
 class SocketUtils
 {
 public:
-    static unsigned char readByte(tcp::socket *);
+    static uint8_t readByte(tcp::socket *);
 
-    static void readByteArray(std::vector<char> *, int, tcp::socket *);
+    static void readByteArray(std::vector<uint8_t> *, int, tcp::socket *);
 };

@@ -13,11 +13,11 @@ public:
 
     ~PQReq();
 
-    virtual int getClassId();
+    virtual uint32_t getClassId() override;
 
-    virtual void serializeBody(std::vector<char> *);
+    virtual void serializeBody(std::vector<uint8_t> *) override;
 
-    virtual void deserializeBody(std::vector<char> *);
+    virtual void deserializeBody(std::vector<uint8_t> *) override;
 
     PQ pq;
 };

@@ -10,7 +10,7 @@ TLReqPQMethod::~TLReqPQMethod()
 {
 }
 
-void TLReqPQMethod::receiveObject(std::vector<char> *vector)
+void TLReqPQMethod::receiveObject(std::vector<uint8_t> *vector)
 {
     recvObject = new PQRes();
     StreamingUtils::readLong(vector); // strip auth_key_id

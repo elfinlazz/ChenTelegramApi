@@ -9,28 +9,28 @@ PQRes::~PQRes()
 {
 }
 
-void PQRes::serializeBody(std::vector<char> *vector)
+void PQRes::serializeBody(std::vector<uint8_t> *vector)
 {
 
 }
 
-void PQRes::deserializeBody(std::vector<char> *vector)
+void PQRes::deserializeBody(std::vector<uint8_t> *vector)
 {
     StreamingUtils::readByteArray(nonce, 16, vector);
     StreamingUtils::readByteArray(serverNonce, 16, vector);
-    char arr[8];
+    uint8_t arr[8];
     StreamingUtils::readTLByteArray(arr, vector);
 
-    int shift = 0;
-    for (int i = 7; i >= 0; i--, shift++)
-        pq += ((uint64_t) (unsigned char) arr[i]) << shift * 8;
+    uint8_t shift = 0;
+    for (int32_t i = 7; i >= 0; i--, shift++)
+        pq += arr[i] << (shift * 8);
 
     TLVector tlVector;
     tlVector.deserialize(vector);
     this->vector = tlVector;
 }
 
-int PQRes::getClassId()
+uint32_t PQRes::getClassId()
 {
     return 0x05162463;
 }

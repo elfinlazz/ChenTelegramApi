@@ -32,10 +32,10 @@ ConnectionState PlainConnection::connect()
 
 void PlainConnection::send(TLObject *obj)
 {
-    std::vector<char> packet;
-    std::vector<char> objPacket;
+    std::vector<uint8_t> packet;
+    std::vector<uint8_t> objPacket;
     obj->serialize(&objPacket);
-    int len = objPacket.size() / 4;
+    uint8_t len = (uint8_t) (objPacket.size() / 4);
 
     if (!fsent)
     {
@@ -45,10 +45,10 @@ void PlainConnection::send(TLObject *obj)
 
     if (len >= 0x7F)
     {
-        StreamingUtils::writeByte(0x7F, &packet);
-        StreamingUtils::writeByte(len & 0xFF, &packet);
-        StreamingUtils::writeByte((len >> 8) & 0xFF, &packet);
-        StreamingUtils::writeByte((len >> 16) & 0xFF, &packet);
+        StreamingUtils::writeByte((uint8_t) 0x7F, &packet);
+        StreamingUtils::writeByte((uint8_t) (len & 0xFF), &packet);
+        StreamingUtils::writeByte((uint8_t) ((len >> 8) & 0xFF), &packet);
+        StreamingUtils::writeByte((uint8_t) ((len >> 16) & 0xFF), &packet);
     }
     else
     {

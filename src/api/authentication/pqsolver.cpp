@@ -10,7 +10,7 @@ PQSolver::~PQSolver()
 {
 }
 
-int64_t gcd(int64_t a, int64_t b)
+uint64_t gcd(uint64_t a, uint64_t b)
 {
     while (a != 0 && b != 0)
     {
@@ -23,26 +23,26 @@ int64_t gcd(int64_t a, int64_t b)
     return b == 0 ? a : b;
 }
 
-int64_t randomNumber(int64_t max)
+uint64_t randomNumber(uint64_t max)
 {
     return rand() % max;
 }
 
-void PQSolver::solvePQ(int64_t input, int64_t *pPtr, int64_t *qPtr)
+void PQSolver::solvePQ(uint64_t input, uint64_t *pPtr, uint64_t *qPtr)
 {
     // Credit: https://github.com/ex3ndr/telegram-mt/blob/master/src/main/java/org/telegram/mtproto/secure/pq/PQLopatin.java
-    int64_t g = 0;
+    uint64_t g = 0;
     int it = 0;
 
     for (int i = 0; i < 3; i++)
     {
-        int64_t q = (randomNumber(128) & 15) + 17;
-        int64_t x = randomNumber(1000000000) + 1, y = x;
+        uint64_t q = (randomNumber(128) & 15) + 17;
+        uint64_t x = randomNumber(1000000000) + 1, y = x;
         int lim = 1 << (i + 18);
         for (int j = 1; j < lim; j++)
         {
             ++it;
-            int64_t a = x, b = x, c = q;
+            uint64_t a = x, b = x, c = q;
             while (b != 0)
             {
                 if ((b & 1) != 0)
@@ -57,7 +57,7 @@ void PQSolver::solvePQ(int64_t input, int64_t *pPtr, int64_t *qPtr)
                 b >>= 1;
             }
             x = c;
-            int64_t z = x < y ? y - x : x - y;
+            uint64_t z = x < y ? y - x : x - y;
             g = gcd(z, input);
 
             if (g != 1)
@@ -71,7 +71,7 @@ void PQSolver::solvePQ(int64_t input, int64_t *pPtr, int64_t *qPtr)
             break;
     }
 
-    int64_t p = input / g;
+    uint64_t p = input / g;
     *pPtr = std::min(p, g);
     *qPtr = std::max(p, g);
 }

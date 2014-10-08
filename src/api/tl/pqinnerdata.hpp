@@ -9,14 +9,14 @@ public:
 
     ~PQInnerData();
 
-    virtual int getClassId() override;
+    virtual uint32_t getClassId() override;
 
-    virtual void serializeBody(std::vector<char> *vector) override;
+    virtual void serializeBody(std::vector<uint8_t> *vector) override;
 
     int64_t pq;
     int64_t p;
     int64_t q;
-    char nonce[16];
-    char serverNonce[16];
-    char newNonce[32];
+    uint8_t nonce[16];
+    uint8_t serverNonce[16];
+    uint8_t newNonce[32];
 };

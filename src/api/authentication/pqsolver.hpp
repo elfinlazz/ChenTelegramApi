@@ -9,5 +9,5 @@ public:
 
     ~PQSolver();
 
-    void solvePQ(int64_t, int64_t*, int64_t*);
+    void solvePQ(uint64_t, uint64_t*, uint64_t*);
 };

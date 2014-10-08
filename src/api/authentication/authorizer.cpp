@@ -36,7 +36,7 @@ AuthenticationState Authorizer::doAuth(ConnectionInfo *info)
     TLReqPQMethod reqPQMethod;
     PQRes *res = connection.executeMethod(&reqPQMethod);
     PQSolver solver;
-    int64_t p, q;
+    uint64_t p, q;
     solver.solvePQ(res->pq, &p, &q);
     //TLReqDHMethod reqDHMethod;
     //reqDHMethod.sendObject->pq = res->pq;

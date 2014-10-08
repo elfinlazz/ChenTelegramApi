@@ -10,7 +10,7 @@ public:
     {
     }
 
-    virtual void receiveObject(std::vector<char> *)
+    virtual void receiveObject(std::vector<uint8_t> *)
     {
     }
 

@@ -11,5 +11,5 @@ public:
 
     ~TLReqPQMethod();
 
-    virtual void receiveObject(std::vector<char> *vector) override;
+    virtual void receiveObject(std::vector<uint8_t> *vector) override;
 };

@@ -9,24 +9,24 @@ PQReq::PQReq()
 {
 }
 
-void PQReq::serializeBody(std::vector<char> *vector)
+void PQReq::serializeBody(std::vector<uint8_t> *vector)
 {
     time_t unixTime = time(nullptr);
     StreamingUtils::writeLong(0, vector);
-    StreamingUtils::writeLong(unixTime * pow(2, 32), vector);
+    StreamingUtils::writeLong((uint64_t) (unixTime * pow(2, 32)), vector);
 
-    std::vector<char> pqrequest;
+    std::vector<uint8_t> pqrequest;
     pq.serialize(&pqrequest);
     StreamingUtils::writeInteger(pqrequest.size(), vector);
     StreamingUtils::writeVector(&pqrequest, vector);
 }
 
-void PQReq::deserializeBody(std::vector<char> *vector)
+void PQReq::deserializeBody(std::vector<uint8_t> *vector)
 {
     // send only
 }
 
-int PQReq::getClassId()
+uint32_t PQReq::getClassId()
 {
     return 0;
 }
