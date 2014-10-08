@@ -1,4 +1,5 @@
-TelegramApi++
-=============
+Chen's Telegram Api
+===================
 
-[ Now printing ]
+A smooth, swift and chaotic implementation of the Telegram API in C++.
+Just like a cat.
