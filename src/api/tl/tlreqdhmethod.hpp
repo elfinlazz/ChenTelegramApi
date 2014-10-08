@@ -3,11 +3,14 @@
 #include "tlmethod.hpp"
 #include "pqinnerdata.hpp"
 #include "reqdhparams.hpp"
+#include "serverdhparams.hpp"
 
-class TLReqDHMethod : TLMethod<PQInnerData, ReqDHParams>
+class TLReqDHMethod : public TLMethod<ReqDHParams, ServerDHParams>
 {
 public:
     TLReqDHMethod();
 
     ~TLReqDHMethod();
+
+    virtual void receiveObject(std::vector<uint8_t> *vector) override;
 };

@@ -5,17 +5,23 @@
 class PQInnerData : public TLObject
 {
 public:
-    PQInnerData();
+    PQInnerData(uint64_t pq, uint32_t p, uint32_t q, uint8_t pNonce[16], uint8_t pServerNonce[16])
+            : nonce(pNonce), serverNonce(pServerNonce)
+    {
+
+    }
 
     ~PQInnerData();
 
     virtual uint32_t getClassId() override;
 
+    virtual void deserializeBody(std::vector<uint8_t> *vector) override;
+
     virtual void serializeBody(std::vector<uint8_t> *vector) override;
 
-    int64_t pq;
-    int64_t p;
-    int64_t q;
+    uint64_t pq;
+    uint32_t p;
+    uint32_t q;
     uint8_t nonce[16];
     uint8_t serverNonce[16];
     uint8_t newNonce[32];

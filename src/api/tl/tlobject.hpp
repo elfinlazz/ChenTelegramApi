@@ -10,7 +10,7 @@ public:
 
     void serialize(std::vector<uint8_t> *);
 
-    void deserialize(std::vector<uint8_t> *);
+    virtual void deserialize(std::vector<uint8_t> *);
 
 private:
     virtual uint32_t getClassId() = 0;

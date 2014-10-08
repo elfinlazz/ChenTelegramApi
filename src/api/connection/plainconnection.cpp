@@ -57,6 +57,8 @@ void PlainConnection::send(TLObject *obj)
 
     StreamingUtils::writeVector(&objPacket, &packet);
 
+    StreamingUtils::DumpVector("Sending", &packet);
+
     boost::system::error_code error;
     socket.write_some(boost::asio::buffer(packet), error);
 }

@@ -16,6 +16,7 @@ src/api/tl/pqinnerdata.hpp src/api/tl/pqinnerdata.cpp
 src/api/tl/pqreq.hpp src/api/tl/pqreq.cpp
 src/api/tl/pqres.hpp src/api/tl/pqres.cpp
 src/api/tl/reqdhparams.hpp src/api/tl/reqdhparams.cpp
+src/api/tl/serverdhparams.hpp src/api/tl/serverdhparams.cpp
 src/api/tl/tlmethod.hpp
 src/api/tl/tlobject.hpp src/api/tl/tlobject.cpp
 src/api/tl/tlreqdhmethod.hpp src/api/tl/tlreqdhmethod.cpp

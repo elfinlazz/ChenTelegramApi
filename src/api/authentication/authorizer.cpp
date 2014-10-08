@@ -36,16 +36,14 @@ AuthenticationState Authorizer::doAuth(ConnectionInfo *info)
     TLReqPQMethod reqPQMethod;
     PQRes *res = connection.executeMethod(&reqPQMethod);
     PQSolver solver;
-    uint64_t p, q;
+    uint32_t p, q;
     solver.solvePQ(res->pq, &p, &q);
-    //TLReqDHMethod reqDHMethod;
-    //reqDHMethod.sendObject->pq = res->pq;
-    //reqDHMethod.sendObject->p = p;
-    //reqDHMethod.sendObject->q = q;
-    //reqDHMethod.sendObject->nonce = res->nonce;
-    //reqDHMethod.sendObject->serverNonce = res->serverNonce;
-    //RandomUtils::nextBytes(reqDHMethod.sendObject->newNonce, 32);
-    //ReqDHParams params = connection.executeMethod(&reqDHMethod);
+    TLReqDHMethod reqDHMethod;
+
+    PQInnerData innerData(res->pq, p, q, res->nonce, res->serverNonce);
+    RandomUtils::nextBytes(innerData.newNonce, 32);
+
+    // TODO: encrypt innerData
 
     return AuthenticationState::AUTHENTICATED;
 }

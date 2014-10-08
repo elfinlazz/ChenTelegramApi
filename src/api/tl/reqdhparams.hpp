@@ -9,10 +9,17 @@ public:
 
     ~ReqDHParams();
 
+    virtual uint32_t getClassId() override;
+
+    virtual void deserializeBody(std::vector<uint8_t> *vector) override;
+    
+    virtual void serializeBody(std::vector<uint8_t> *vector) override;
+
+private:
     uint8_t nonce[16];
     uint8_t serverNonce[16];
-    int64_t p;
-    int64_t q;
-    int64_t fingerprint;
+    uint64_t p;
+    uint64_t q;
+    uint64_t fingerprint;
     uint8_t encData[260];
 };

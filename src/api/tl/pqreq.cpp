@@ -11,9 +11,9 @@ PQReq::PQReq()
 
 void PQReq::serializeBody(std::vector<uint8_t> *vector)
 {
-    time_t unixTime = time(nullptr);
+    uint64_t nixTime = (uint64_t) (time(nullptr) * pow(2, 32));
     StreamingUtils::writeLong(0, vector);
-    StreamingUtils::writeLong((uint64_t) (unixTime * pow(2, 32)), vector);
+    StreamingUtils::writeLong(nixTime, vector);
 
     std::vector<uint8_t> pqrequest;
     pq.serialize(&pqrequest);

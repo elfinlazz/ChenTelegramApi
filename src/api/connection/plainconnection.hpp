@@ -9,6 +9,7 @@
 #include "../tl/pqreq.hpp"
 #include "../tl/tlmethod.hpp"
 #include "../utils/socketutils.hpp"
+#include "../utils/streamingutils.hpp"
 
 using boost::asio::ip::tcp;
 
@@ -38,6 +39,8 @@ public:
         }
         int len = headerLen * 4;
         SocketUtils::readByteArray(&recvVector, len, &socket);
+
+        StreamingUtils::DumpVector("Received", &recvVector);
 
         method->receiveObject(&recvVector);
         return method->recvObject;

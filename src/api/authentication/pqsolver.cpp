@@ -28,7 +28,7 @@ uint64_t randomNumber(uint64_t max)
     return rand() % max;
 }
 
-void PQSolver::solvePQ(uint64_t input, uint64_t *pPtr, uint64_t *qPtr)
+void PQSolver::solvePQ(uint64_t input, uint32_t *pPtr, uint32_t *qPtr)
 {
     // Credit: https://github.com/ex3ndr/telegram-mt/blob/master/src/main/java/org/telegram/mtproto/secure/pq/PQLopatin.java
     uint64_t g = 0;
@@ -72,6 +72,6 @@ void PQSolver::solvePQ(uint64_t input, uint64_t *pPtr, uint64_t *qPtr)
     }
 
     uint64_t p = input / g;
-    *pPtr = std::min(p, g);
-    *qPtr = std::max(p, g);
+    *pPtr = (uint32_t) std::min(p, g);
+    *qPtr = (uint32_t) std::max(p, g);
 }
