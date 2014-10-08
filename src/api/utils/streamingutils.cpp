@@ -177,7 +177,7 @@ void StreamingUtils::DumpVector(std::string header, std::vector<uint8_t> *vector
 {
     printf("\n\n");
     std::cout << header;
-    printf(" %i bytes\n", vector->size());
+    printf(" %u bytes\n", vector->size());
     int c = *vector->begin() == 0xEF ? 14 : 15;
     for (std::vector<uint8_t>::const_iterator it = vector->begin(); it != vector->end(); ++it)
     {
