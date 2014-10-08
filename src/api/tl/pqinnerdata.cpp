@@ -2,7 +2,8 @@
 #include "../utils/streamingutils.hpp"
 #include "../utils/randomutils.hpp"
 
-PQInnerData::PQInnerData(uint64_t pq, uint32_t p, uint32_t q, uint8_t pNonce[], uint8_t pServerNonce[])
+PQInnerData::PQInnerData(uint64_t pq, uint32_t p, uint32_t q, uint8_t (&pNonce)[16], uint8_t (&pServerNonce)[16])
+        : nonce(pNonce), serverNonce(pServerNonce)
 {
     this->pq = pq;
     this->p = p;

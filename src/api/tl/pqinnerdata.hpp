@@ -5,11 +5,7 @@
 class PQInnerData : public TLObject
 {
 public:
-    PQInnerData(uint64_t pq, uint32_t p, uint32_t q, uint8_t pNonce[16], uint8_t pServerNonce[16])
-            : nonce(pNonce), serverNonce(pServerNonce)
-    {
-
-    }
+    PQInnerData(uint64_t pq, uint32_t p, uint32_t q, uint8_t (&pNonce)[16], uint8_t (&pServerNonce)[16]);
 
     ~PQInnerData();
 
@@ -22,7 +18,7 @@ public:
     uint64_t pq;
     uint32_t p;
     uint32_t q;
-    uint8_t nonce[16];
-    uint8_t serverNonce[16];
+    uint8_t (&nonce)[16];
+    uint8_t (&serverNonce)[16];
     uint8_t newNonce[32];
 };
