@@ -15,6 +15,6 @@ int main(int argc, char *argv[])
     ConnectionInfo info{"173.240.5.253", "25"};
     infos.push_back(info);
 
-    Authorizer auth(&infos);
+    Authorizer auth(infos);
     auth.attemptAuth();
 }

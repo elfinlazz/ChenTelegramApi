@@ -2,18 +2,18 @@
 #include <iostream>
 #include <boost/array.hpp>
 
-void StreamingUtils::writeVector(std::vector<uint8_t> *source, std::vector<uint8_t> *vector)
+void StreamingUtils::writeVector(std::vector<uint8_t> &source, std::vector<uint8_t> &vector)
 {
-    std::vector<uint8_t>::iterator i = source->begin();
+    std::vector<uint8_t>::iterator i = source.begin();
     for (; ;)
     {
         writeByte(*i++, vector);
-        if (i == source->end())
+        if (i == source.end())
             break;
     }
 }
 
-void StreamingUtils::writeInteger(uint32_t i, std::vector<uint8_t> *vector)
+void StreamingUtils::writeInteger(uint32_t i, std::vector<uint8_t> &vector)
 {
     writeByte((uint8_t) (i & 0xFF), vector);
     writeByte((uint8_t) ((i >> 8) & 0xFF), vector);
@@ -21,7 +21,7 @@ void StreamingUtils::writeInteger(uint32_t i, std::vector<uint8_t> *vector)
     writeByte((uint8_t) ((i >> 24) & 0xFF), vector);
 }
 
-void StreamingUtils::writeLong(uint64_t l, std::vector<uint8_t> *vector)
+void StreamingUtils::writeLong(uint64_t l, std::vector<uint8_t> &vector)
 {
     writeByte((uint8_t) (l & 0xFF), vector);
     writeByte((uint8_t) ((l >> 8) & 0xFF), vector);
@@ -34,26 +34,26 @@ void StreamingUtils::writeLong(uint64_t l, std::vector<uint8_t> *vector)
     writeByte((uint8_t) ((l >> 56) & 0xFF), vector);
 }
 
-void StreamingUtils::writeByteArray(uint8_t *buf, uint32_t length, std::vector<uint8_t> *vector)
+void StreamingUtils::writeByteArray(const uint8_t *buf, uint32_t length, std::vector<uint8_t> &vector)
 {
     for (uint32_t i = 0; i < length; i++)
         writeByte(buf[i], vector);
 }
 
-void StreamingUtils::writeByte(uint8_t c, std::vector<uint8_t> *vector)
+void StreamingUtils::writeByte(uint8_t c, std::vector<uint8_t> &vector)
 {
-    vector->insert(vector->end(), c);
+    vector.insert(vector.end(), c);
 }
 
-uint8_t StreamingUtils::readByte(std::vector<uint8_t> *vector)
+uint8_t StreamingUtils::readByte(std::vector<uint8_t> &vector)
 {
-    std::vector<uint8_t>::iterator it = vector->begin();
+    std::vector<uint8_t>::iterator it = vector.begin();
     uint8_t c = *it;
-    vector->erase(it);
+    vector.erase(it);
     return c;
 }
 
-uint32_t StreamingUtils::readInteger(std::vector<uint8_t> *vector)
+uint32_t StreamingUtils::readInteger(std::vector<uint8_t> &vector)
 {
     uint8_t a = readByte(vector);
     uint8_t b = readByte(vector);
@@ -63,7 +63,7 @@ uint32_t StreamingUtils::readInteger(std::vector<uint8_t> *vector)
     return a + (b << 8) + (c << 16) + (d << 24);
 }
 
-uint64_t StreamingUtils::readLong(std::vector<uint8_t> *vector)
+uint64_t StreamingUtils::readLong(std::vector<uint8_t> &vector)
 {
     uint64_t a = readInteger(vector);
     uint64_t b = readInteger(vector);
@@ -71,13 +71,13 @@ uint64_t StreamingUtils::readLong(std::vector<uint8_t> *vector)
     return a + (b << 32);
 }
 
-void StreamingUtils::readByteArray(uint8_t *target, uint32_t count, std::vector<uint8_t> *vector)
+void StreamingUtils::readByteArray(uint8_t *target, uint32_t count, std::vector<uint8_t> &vector)
 {
     for (uint32_t i = 0; i < count; i++)
         target[i] = readByte(vector);
 }
 
-void StreamingUtils::readTLByteArray(uint8_t *target, std::vector<uint8_t> *vector)
+void StreamingUtils::readTLByteArray(uint8_t *target, std::vector<uint8_t> &vector)
 {
     uint8_t count = readByte(vector);
     int startOffset = 1;
@@ -100,7 +100,7 @@ void StreamingUtils::readTLByteArray(uint8_t *target, std::vector<uint8_t> *vect
     }
 }
 
-void StreamingUtils::writeTLBytes(uint8_t *buf, uint32_t count, std::vector<uint8_t> *vector)
+void StreamingUtils::writeTLBytes(const uint8_t *buf, uint32_t count, std::vector<uint8_t> &vector)
 {
     int startOffset = 1;
     if (count >= 254)
@@ -127,7 +127,7 @@ void StreamingUtils::writeTLBytes(uint8_t *buf, uint32_t count, std::vector<uint
     }
 }
 
-void StreamingUtils::writeLongAsTLBytes(uint64_t val, std::vector<uint8_t> *vector)
+void StreamingUtils::writeLongAsTLBytes(uint64_t val, std::vector<uint8_t> &vector)
 {
     uint8_t arr[8] = {0};
     int shift = 0;
@@ -137,7 +137,7 @@ void StreamingUtils::writeLongAsTLBytes(uint64_t val, std::vector<uint8_t> *vect
     StreamingUtils::writeTLBytes(arr, 8, vector);
 }
 
-void StreamingUtils::writeIntegerAsTLBytes(uint32_t val, std::vector<uint8_t> *vector)
+void StreamingUtils::writeIntegerAsTLBytes(uint32_t val, std::vector<uint8_t> &vector)
 {
     uint8_t arr[4] = {0};
     int shift = 0;
@@ -147,7 +147,7 @@ void StreamingUtils::writeIntegerAsTLBytes(uint32_t val, std::vector<uint8_t> *v
     StreamingUtils::writeTLBytes(arr, 4, vector);
 }
 
-uint64_t StreamingUtils::readLongFromTLByteArray(std::vector<uint8_t> *vector)
+uint64_t StreamingUtils::readLongFromTLByteArray(std::vector<uint8_t> &vector)
 {
     uint64_t val = 0;
     uint8_t arr[8];
@@ -160,7 +160,7 @@ uint64_t StreamingUtils::readLongFromTLByteArray(std::vector<uint8_t> *vector)
     return val;
 }
 
-uint32_t StreamingUtils::readIntegerFromTLByteArray(std::vector<uint8_t> *vector)
+uint32_t StreamingUtils::readIntegerFromTLByteArray(std::vector<uint8_t> &vector)
 {
     uint32_t val = 0;
     uint8_t arr[4];
@@ -173,13 +173,13 @@ uint32_t StreamingUtils::readIntegerFromTLByteArray(std::vector<uint8_t> *vector
     return val;
 }
 
-void StreamingUtils::DumpVector(std::string header, std::vector<uint8_t> *vector)
+void StreamingUtils::DumpVector(std::string header, std::vector<uint8_t> &vector)
 {
     printf("\n\n");
     std::cout << header;
-    printf(" %u bytes\n", vector->size());
-    int c = *vector->begin() == 0xEF ? 14 : 15;
-    for (std::vector<uint8_t>::const_iterator it = vector->begin(); it != vector->end(); ++it)
+    printf(" %u bytes\n", vector.size());
+    int c = *vector.begin() == 0xEF ? 14 : 15;
+    for (std::vector<uint8_t>::const_iterator it = vector.begin(); it != vector.end(); ++it)
     {
         printf("%02X ", *it);
         c++;

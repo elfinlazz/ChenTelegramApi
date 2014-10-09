@@ -10,7 +10,5 @@ class TLReqDHMethod : public TLMethod<ReqDHParams, ServerDHParams>
 public:
     TLReqDHMethod();
 
-    ~TLReqDHMethod();
-
-    virtual void receiveObject(std::vector<uint8_t> *vector) override;
+    virtual void receiveObject(std::vector<uint8_t> &) override;
 };

@@ -6,17 +6,15 @@
 class TLObject
 {
 public:
-    virtual ~TLObject() = 0;
+    void serialize(std::vector<uint8_t> &);
 
-    void serialize(std::vector<uint8_t> *);
-
-    virtual void deserialize(std::vector<uint8_t> *);
+    virtual void deserialize(std::vector<uint8_t> &);
 
 private:
     virtual uint32_t getClassId() = 0;
 
-    virtual void serializeBody(std::vector<uint8_t> *) = 0;
+    virtual void serializeBody(std::vector<uint8_t> &) = 0;
 
-    virtual void deserializeBody(std::vector<uint8_t> *) = 0;
+    virtual void deserializeBody(std::vector<uint8_t> &) = 0;
 };
 

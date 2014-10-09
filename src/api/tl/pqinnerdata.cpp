@@ -11,17 +11,12 @@ PQInnerData::PQInnerData(uint64_t pq, uint32_t p, uint32_t q, uint8_t (&pNonce)[
     RandomUtils::nextBytes(newNonce, 32);
 }
 
-PQInnerData::~PQInnerData()
+void PQInnerData::deserializeBody(std::vector<uint8_t> &vector)
 {
 
 }
 
-void PQInnerData::deserializeBody(std::vector<uint8_t> *vector)
-{
-
-}
-
-void PQInnerData::serializeBody(std::vector<uint8_t> *vector)
+void PQInnerData::serializeBody(std::vector<uint8_t> &vector)
 {
     StreamingUtils::writeLongAsTLBytes(pq, vector);
     StreamingUtils::writeIntegerAsTLBytes(p, vector);

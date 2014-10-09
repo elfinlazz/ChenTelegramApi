@@ -6,11 +6,7 @@ TLReqDHMethod::TLReqDHMethod()
     sendObject = new ReqDHParams();
 }
 
-TLReqDHMethod::~TLReqDHMethod()
-{
-}
-
-void TLReqDHMethod::receiveObject(std::vector<uint8_t> *vector)
+void TLReqDHMethod::receiveObject(std::vector<uint8_t> &vector)
 {
     recvObject = new ServerDHParams();
     StreamingUtils::readLong(vector); // strip auth_key_id

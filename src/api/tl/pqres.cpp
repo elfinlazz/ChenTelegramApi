@@ -5,16 +5,12 @@ PQRes::PQRes()
 {
 }
 
-PQRes::~PQRes()
-{
-}
-
-void PQRes::serializeBody(std::vector<uint8_t> *vector)
+void PQRes::serializeBody(std::vector<uint8_t> &vector)
 {
 
 }
 
-void PQRes::deserializeBody(std::vector<uint8_t> *vector)
+void PQRes::deserializeBody(std::vector<uint8_t> &vector)
 {
     StreamingUtils::readByteArray(nonce, 16, vector);
     StreamingUtils::readByteArray(serverNonce, 16, vector);

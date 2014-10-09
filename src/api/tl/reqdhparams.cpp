@@ -3,12 +3,6 @@
 
 ReqDHParams::ReqDHParams()
 {
-
-}
-
-ReqDHParams::~ReqDHParams()
-{
-
 }
 
 uint32_t ReqDHParams::getClassId()
@@ -16,7 +10,7 @@ uint32_t ReqDHParams::getClassId()
     return 0xd712e4be;
 }
 
-void ReqDHParams::deserializeBody(std::vector<uint8_t> *vector)
+void ReqDHParams::deserializeBody(std::vector<uint8_t> &vector)
 {
     StreamingUtils::readByteArray(nonce, 16, vector);
     StreamingUtils::readByteArray(serverNonce, 16, vector);
@@ -26,7 +20,7 @@ void ReqDHParams::deserializeBody(std::vector<uint8_t> *vector)
     StreamingUtils::readByteArray(encData, 260, vector);
 }
 
-void ReqDHParams::serializeBody(std::vector<uint8_t> *vector)
+void ReqDHParams::serializeBody(std::vector<uint8_t> &vector)
 {
 
 }

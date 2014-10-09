@@ -1,10 +1,9 @@
 #include <boost/array.hpp>
 #include "plainconnection.hpp"
-#include "../utils/streamingutils.hpp"
 
-PlainConnection::PlainConnection(ConnectionInfo *info) : socket(io_service)
+PlainConnection::PlainConnection(ConnectionInfo &pInfo)
+        : info(pInfo), socket(io_service)
 {
-    this->info = info;
 }
 
 PlainConnection::~PlainConnection()
@@ -14,7 +13,7 @@ PlainConnection::~PlainConnection()
 ConnectionState PlainConnection::connect()
 {
     tcp::resolver resolver(io_service);
-    tcp::resolver::query query(info->host, info->port);
+    tcp::resolver::query query(info.host, info.port);
 
     tcp::resolver::iterator it = resolver.resolve(query);
     tcp::resolver::iterator end;
@@ -34,30 +33,30 @@ void PlainConnection::send(TLObject *obj)
 {
     std::vector<uint8_t> packet;
     std::vector<uint8_t> objPacket;
-    obj->serialize(&objPacket);
+    obj->serialize(objPacket);
     uint8_t len = (uint8_t) (objPacket.size() / 4);
 
     if (!fsent)
     {
-        StreamingUtils::writeByte(0xEF, &packet);
+        StreamingUtils::writeByte(0xEF, packet);
         fsent = true;
     }
 
     if (len >= 0x7F)
     {
-        StreamingUtils::writeByte((uint8_t) 0x7F, &packet);
-        StreamingUtils::writeByte((uint8_t) (len & 0xFF), &packet);
-        StreamingUtils::writeByte((uint8_t) ((len >> 8) & 0xFF), &packet);
-        StreamingUtils::writeByte((uint8_t) ((len >> 16) & 0xFF), &packet);
+        StreamingUtils::writeByte((uint8_t) 0x7F, packet);
+        StreamingUtils::writeByte((uint8_t) (len & 0xFF), packet);
+        StreamingUtils::writeByte((uint8_t) ((len >> 8) & 0xFF), packet);
+        StreamingUtils::writeByte((uint8_t) ((len >> 16) & 0xFF), packet);
     }
     else
     {
-        StreamingUtils::writeByte(len, &packet);
+        StreamingUtils::writeByte(len, packet);
     }
 
-    StreamingUtils::writeVector(&objPacket, &packet);
+    StreamingUtils::writeVector(objPacket, packet);
 
-    StreamingUtils::DumpVector("Sending", &packet);
+    StreamingUtils::DumpVector("Sending", packet);
 
     boost::system::error_code error;
     socket.write_some(boost::asio::buffer(packet), error);

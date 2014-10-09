@@ -9,13 +9,11 @@ class PQRes : public TLObject
 public:
     PQRes();
 
-    ~PQRes();
-
     virtual uint32_t getClassId() override;
 
-    virtual void serializeBody(std::vector<uint8_t> *) override;
+    virtual void serializeBody(std::vector<uint8_t> &) override;
 
-    virtual void deserializeBody(std::vector<uint8_t> *) override;
+    virtual void deserializeBody(std::vector<uint8_t> &) override;
 
     uint8_t nonce[16];
     uint8_t serverNonce[16];

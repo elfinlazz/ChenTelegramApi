@@ -9,15 +9,15 @@
 class Authorizer
 {
 public:
-    Authorizer(std::vector<ConnectionInfo> *);
+    Authorizer(std::vector<ConnectionInfo> &);
 
     ~Authorizer();
 
     AuthenticationState attemptAuth();
 
 private:
-    AuthenticationState doAuth(ConnectionInfo *);
+    AuthenticationState doAuth(ConnectionInfo &);
 
-    std::vector<ConnectionInfo> *infoList;
+    std::vector<ConnectionInfo> &infoList;
 };
 

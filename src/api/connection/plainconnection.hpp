@@ -16,7 +16,7 @@ using boost::asio::ip::tcp;
 class PlainConnection
 {
 public:
-    PlainConnection(ConnectionInfo *);
+    PlainConnection(ConnectionInfo &);
 
     ~PlainConnection();
 
@@ -25,29 +25,29 @@ public:
     void send(TLObject *);
 
     template<class TSend, class TRecv>
-    TRecv *executeMethod(TLMethod<TSend, TRecv> *method)
+    TRecv *executeMethod(TLMethod<TSend, TRecv> &method)
     {
-        send(method->sendObject);
+        send(method.sendObject);
         std::vector<uint8_t> recvVector;
 
-        int headerLen = (int) SocketUtils::readByte(&socket);
+        int headerLen = (int) SocketUtils::readByte(socket);
         if (headerLen == 0x7F)
         {
-            headerLen = SocketUtils::readByte(&socket);
-            headerLen += SocketUtils::readByte(&socket) << 8;
-            headerLen += SocketUtils::readByte(&socket) << 16;
+            headerLen = SocketUtils::readByte(socket);
+            headerLen += SocketUtils::readByte(socket) << 8;
+            headerLen += SocketUtils::readByte(socket) << 16;
         }
         int len = headerLen * 4;
-        SocketUtils::readByteArray(&recvVector, len, &socket);
+        SocketUtils::readByteArray(recvVector, len, socket);
 
-        StreamingUtils::DumpVector("Received", &recvVector);
+        StreamingUtils::DumpVector("Received", recvVector);
 
-        method->receiveObject(&recvVector);
-        return method->recvObject;
+        method.receiveObject(recvVector);
+        return method.recvObject;
     };
 
 private:
-    ConnectionInfo *info;
+    ConnectionInfo &info;
     boost::asio::io_service io_service;
     tcp::socket socket;
     bool fsent = false;

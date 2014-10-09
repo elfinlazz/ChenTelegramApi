@@ -1,11 +1,7 @@
 #include "tlobject.hpp"
 #include "../utils/streamingutils.hpp"
 
-TLObject::~TLObject()
-{
-}
-
-void TLObject::serialize(std::vector<uint8_t> *vector)
+void TLObject::serialize(std::vector<uint8_t> &vector)
 {
     uint32_t classId = getClassId();
     if (classId != 0)
@@ -14,7 +10,7 @@ void TLObject::serialize(std::vector<uint8_t> *vector)
     serializeBody(vector);
 }
 
-void TLObject::deserialize(std::vector<uint8_t> *vector)
+void TLObject::deserialize(std::vector<uint8_t> &vector)
 {
     if (getClassId() != 0)
     {

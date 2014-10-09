@@ -6,14 +6,11 @@ template<class TSend, class TRecv>
 class TLMethod
 {
 public:
-    virtual ~TLMethod()
+    virtual void receiveObject(std::vector<uint8_t> &)
     {
     }
 
-    virtual void receiveObject(std::vector<uint8_t> *)
-    {
-    }
-
-    TSend* sendObject;
-    TRecv* recvObject;
+    // TODO: reference possible?
+    TSend *sendObject;
+    TRecv *recvObject;
 };
