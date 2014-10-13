@@ -23,20 +23,6 @@ namespace TelegramApi.TLCoreTest.Extensions
         }
 
         [Test]
-        public void WriteInt16_WhenIntWritten_ThenBytesAdded()
-        {
-            // arrange
-            byte[] expectedBytes = { 0x1A, 0x1F };
-            List<byte> list = new List<byte>();
-
-            // act
-            list.WriteInt16(0x1F1A);
-
-            // assert
-            list.Should().ContainInOrder(expectedBytes);
-        }
-
-        [Test]
         public void WriteInt32_WhenIntWritten_ThenBytesAdded()
         {
             // arrange
@@ -92,22 +78,7 @@ namespace TelegramApi.TLCoreTest.Extensions
             result.ShouldBeEquivalentTo(Expected);
             list.Count.ShouldBeEquivalentTo(1);
         }
-
-        [Test]
-        public void ReadInt16_ThenInt16Read()
-        {
-            // arrange
-            const Int16 Expected = 0x1357;
-            List<byte> list = new List<byte> { 0x57, 0x13, 0xFA };
-
-            // act
-            Int16 result = list.ReadInt16();
-
-            // assert
-            result.ShouldBeEquivalentTo(Expected);
-            list.Count.ShouldBeEquivalentTo(1);
-        }
-
+        
         [Test]
         public void ReadInt32_ThenInt16Read()
         {

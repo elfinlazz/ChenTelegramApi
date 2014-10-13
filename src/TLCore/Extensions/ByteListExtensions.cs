@@ -36,30 +36,20 @@ namespace TelegramApi.TLCore.Extensions
 
         public static void WriteInt32(this List<byte> byteList, Int32 value)
         {
-            byteList.WriteInt16((Int16)((value) & 0xFFFF));
-            byteList.WriteInt16((Int16)((value >> 16) & 0xFFFF));
+            byteList.WriteByte((byte)(value & 0xFF));
+            byteList.WriteByte((byte)((value >> 8) & 0xFF));
+            byteList.WriteByte((byte)((value >> 16) & 0xFF));
+            byteList.WriteByte((byte)((value >> 24) & 0xFF));
         }
 
         public static Int32 ReadInt32(this List<byte> byteList)
         {
-            Int32 a = byteList.ReadInt16();
-            Int32 b = byteList.ReadInt16();
+            byte a = byteList.ReadByte();
+            byte b = byteList.ReadByte();
+            byte c = byteList.ReadByte();
+            byte d = byteList.ReadByte();
 
-            return a + (b << 16);
-        }
-
-        public static void WriteInt16(this List<byte> byteList, Int16 value)
-        {
-            byteList.WriteByte((byte)((value) & 0xFF));
-            byteList.WriteByte((byte)((value >> 8) & 0xFF));
-        }
-
-        public static Int16 ReadInt16(this List<byte> byteList)
-        {
-            Int16 a = byteList.ReadByte();
-            Int16 b = byteList.ReadByte();
-
-            return (Int16)(a + (b << 8));
+            return a + (b << 8) + (c << 16) + (d << 24);
         }
 
         public static void WriteByte(this List<byte> byteList, byte value)

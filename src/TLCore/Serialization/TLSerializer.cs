@@ -16,9 +16,6 @@ namespace TelegramApi.TLCore.Serialization
             else if (propertyInfo.PropertyType == typeof(Int32))
                 byteList.WriteInt32((Int32)propertyInfo.GetValue(tlObject));
 
-            else if (propertyInfo.PropertyType == typeof(Int16))
-                byteList.WriteInt16((Int16)propertyInfo.GetValue(tlObject));
-
             else if (propertyInfo.PropertyType == typeof(byte[]))
                 byteList.WriteByteArray((byte[])propertyInfo.GetValue(tlObject));
 
@@ -33,9 +30,6 @@ namespace TelegramApi.TLCore.Serialization
 
             else if (propertyInfo.PropertyType == typeof(Int32))
                 propertyInfo.SetValue(tlObject, byteList.ReadInt32());
-
-            else if (propertyInfo.PropertyType == typeof(Int16))
-                propertyInfo.SetValue(tlObject, byteList.ReadInt16());
 
             else if (propertyInfo.PropertyType == typeof(byte[]))
                 propertyInfo.SetValue(tlObject, byteList.ReadByteArray(propertyInfo.GetCustomAttribute<TLPropertyAttribute>().ArrayLength));
