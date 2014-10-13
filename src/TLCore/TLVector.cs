@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TelegramApi.TLCore.Extensions;
 using TelegramApi.TLCore.Serialization;
 
 namespace TelegramApi.TLCore
@@ -12,5 +13,17 @@ namespace TelegramApi.TLCore
         }
 
         public List<T> Content { get; private set; }
+
+        public static TLVector<T> Deserialize(List<byte> byteList)
+        {
+            TLVector<T> vector = new TLVector<T>();
+
+            int len = byteList.ReadInt32();
+            for (int i = 0; i < len; i++)
+            {
+            }
+
+            return vector;
+        }
     }
 }
