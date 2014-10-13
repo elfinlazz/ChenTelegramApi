@@ -40,7 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorization\Authenticator.cs" />
+    <Compile Include="Connection\ConnectionInfo.cs" />
+    <Compile Include="Connection\IConnectionInfo.cs" />
+    <Compile Include="Connection\IPlainConnection.cs" />
+    <Compile Include="Connection\PlainConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TLCore\TelegramApi.TLCore.csproj">
+      <Project>{87D94B26-BCC2-4188-8826-18E33525F9D4}</Project>
+      <Name>TelegramApi.TLCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

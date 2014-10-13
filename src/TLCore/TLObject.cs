@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using TelegramApi.TLCore.Extensions;
 using TelegramApi.TLCore.Serialization;
 
 namespace TelegramApi.TLCore
@@ -9,12 +9,12 @@ namespace TelegramApi.TLCore
     {
         public IEnumerable<PropertyInfo> GetTLProperties()
         {
-            return GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(propInfo => propInfo.GetCustomAttribute<TLPropertyAttribute>() != null);
+            return GetType().GetTLProperties();
         }
 
         public int GetClassId()
         {
-            return GetType().GetCustomAttribute<TLClassIdAttribute>().ClassId;
+            return GetType().GetClassId();
         }
     }
 }

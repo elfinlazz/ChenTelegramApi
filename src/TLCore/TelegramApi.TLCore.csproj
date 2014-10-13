@@ -41,10 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authorization\ReqPQ.cs" />
+    <Compile Include="Authorization\ReqPq.cs" />
+    <Compile Include="Authorization\ResPq.cs" />
+    <Compile Include="TLBytes.cs" />
+    <Compile Include="Authorization\TLReqPqMethod.cs" />
+    <Compile Include="TLVector.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Serialization\ITLSerializer.cs" />
+    <Compile Include="TLMethod.cs" />
     <Compile Include="TLFrame.cs" />
     <Compile Include="TLObject.cs" />
-    <Compile Include="Serialization\ByteListExtensions.cs" />
+    <Compile Include="Extensions\ByteListExtensions.cs" />
     <Compile Include="Serialization\TLPropertyAttribute.cs" />
     <Compile Include="Serialization\TLClassIdAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

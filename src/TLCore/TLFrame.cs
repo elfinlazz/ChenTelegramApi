@@ -3,7 +3,7 @@ using TelegramApi.TLCore.Serialization;
 
 namespace TelegramApi.TLCore
 {
-    public class TLFrame : TLObject
+    public class TLFrame<T> : TLObject
     {
         [TLProperty]
         public Int64 AuthKey { get; set; }
@@ -15,6 +15,6 @@ namespace TelegramApi.TLCore
         public Int32 MessageLength { get; set; }
 
         [TLProperty]
-        public TLObject Content { get; set; }
+        public T Content { get; set; }
     }
 }

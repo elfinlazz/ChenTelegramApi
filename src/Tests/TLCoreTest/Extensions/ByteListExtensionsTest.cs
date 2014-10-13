@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
-using TelegramApi.TLCore.Serialization;
+using TelegramApi.TLCore.Extensions;
 
-namespace TelegramApi.TLCoreTest.Serialization
+namespace TelegramApi.TLCoreTest.Extensions
 {
     public class ByteListExtensionsTest
     {
