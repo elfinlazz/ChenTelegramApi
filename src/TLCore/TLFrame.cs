@@ -1,7 +1,7 @@
 ﻿using System;
 using TelegramApi.TLCore.Serialization;
 
-namespace TelegramApi.TLCore.Authorization
+namespace TelegramApi.TLCore
 {
     public class TLFrame : TLObject
     {

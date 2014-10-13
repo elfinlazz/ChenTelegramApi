@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using TelegramApi.TLCore.Serialization;
 
-namespace TelegramApi.TLCore.Authorization
+namespace TelegramApi.TLCore
 {
     public abstract class TLObject
     {

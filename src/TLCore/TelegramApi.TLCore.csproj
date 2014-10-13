@@ -42,11 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorization\ReqPQ.cs" />
-    <Compile Include="Authorization\TLFrame.cs" />
-    <Compile Include="Authorization\TLObject.cs" />
+    <Compile Include="TLFrame.cs" />
+    <Compile Include="TLObject.cs" />
     <Compile Include="Serialization\ByteListExtensions.cs" />
     <Compile Include="Serialization\TLPropertyAttribute.cs" />
-    <Compile Include="Serialization\TlClassIdAttribute.cs" />
+    <Compile Include="Serialization\TLClassIdAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\TLSerializer.cs" />
   </ItemGroup>
