@@ -28,8 +28,8 @@ namespace TelegramApi.TLCore.Extensions
 
         public static Int64 ReadInt64(this List<byte> byteList)
         {
-            Int32 a = byteList.ReadInt32();
-            Int32 b = byteList.ReadInt32();
+            Int64 a = byteList.ReadInt32();
+            Int64 b = byteList.ReadInt32();
 
             return a + (b << 32);
         }
@@ -42,8 +42,8 @@ namespace TelegramApi.TLCore.Extensions
 
         public static Int32 ReadInt32(this List<byte> byteList)
         {
-            Int16 a = byteList.ReadInt16();
-            Int16 b = byteList.ReadInt16();
+            Int32 a = byteList.ReadInt16();
+            Int32 b = byteList.ReadInt16();
 
             return a + (b << 16);
         }
@@ -56,8 +56,8 @@ namespace TelegramApi.TLCore.Extensions
 
         public static Int16 ReadInt16(this List<byte> byteList)
         {
-            byte a = byteList.ReadByte();
-            byte b = byteList.ReadByte();
+            Int16 a = byteList.ReadByte();
+            Int16 b = byteList.ReadByte();
 
             return (Int16)(a + (b << 8));
         }

@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ByteListExtensionsTest.cs" />
+    <Compile Include="Extensions\DateTimeExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\TLSerializerTest.cs" />
   </ItemGroup>
