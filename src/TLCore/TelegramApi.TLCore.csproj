@@ -50,6 +50,7 @@
     <Compile Include="Serialization\ITLSerializerFactory.cs" />
     <Compile Include="Serialization\ITLTypeSerializer.cs" />
     <Compile Include="Serialization\Serializer\TLByteArraySerializer.cs" />
+    <Compile Include="Serialization\Serializer\TLBytesSerializer.cs" />
     <Compile Include="Serialization\Serializer\TLInt32Serializer.cs" />
     <Compile Include="Serialization\Serializer\TLInt64Serializer.cs" />
     <Compile Include="Serialization\TLTypeSerializerBase.cs" />
