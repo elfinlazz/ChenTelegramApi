@@ -67,14 +67,14 @@ namespace TelegramApi.MTProto.Connection
 
             if (len >= 0x7F)
             {
-                packet.WriteByte(0x7F);
-                packet.WriteByte((byte)(len & 0xFF));
-                packet.WriteByte((byte)((len >> 8) & 0xFF));
-                packet.WriteByte((byte)((len >> 16) & 0xFF));
+                packet.Add(0x7F);
+                packet.Add((byte)(len & 0xFF));
+                packet.Add((byte)((len >> 8) & 0xFF));
+                packet.Add((byte)((len >> 16) & 0xFF));
             }
             else
             {
-                packet.WriteByte(len);
+                packet.Add(len);
             }
 
             packet.AddRange(objArr);

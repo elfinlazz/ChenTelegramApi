@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TelegramApi.TLCore.Extensions;
 
 namespace TelegramApi.TLCore
@@ -22,7 +23,8 @@ namespace TelegramApi.TLCore
                 startOffset = 4;
             }
 
-            bytes.Content = byteList.ReadByteArray(count);
+            bytes.Content = byteList.Take(count).ToArray();
+            byteList.RemoveRange(0, count);
 
             int offset = (count + startOffset) % 4;
             if (offset != 0)
