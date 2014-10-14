@@ -5,6 +5,7 @@ using TelegramApi.MTProto.Connection;
 using TelegramApi.TLCore;
 using TelegramApi.TLCore.Authorization;
 using TelegramApi.TLCore.Extensions;
+using TelegramApi.TLCore.Kernel;
 using TelegramApi.TLCore.Serialization;
 
 namespace TelegramApi.MTProto.Authorization
@@ -26,7 +27,7 @@ namespace TelegramApi.MTProto.Authorization
 
         private async Task DoAuthentication(IConnectionInfo connectionInfo)
         {
-            IPlainConnection connection = new PlainConnection(connectionInfo, new TLSerializer());
+            IPlainConnection connection = new PlainConnection(connectionInfo, CoreKernel.Get<ITLObjectDeserializer>()); // TODO: not pretty, please change
             await connection.ConnectAsync();
 
             TLReqPqMethod method = new TLReqPqMethod();

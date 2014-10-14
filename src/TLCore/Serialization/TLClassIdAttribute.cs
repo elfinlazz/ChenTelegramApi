@@ -3,7 +3,7 @@
 namespace TelegramApi.TLCore.Serialization
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class TLClassIdAttribute : Attribute
+    public class TLClassIdAttribute : System.Attribute
     {
         public TLClassIdAttribute(int classId)
         {

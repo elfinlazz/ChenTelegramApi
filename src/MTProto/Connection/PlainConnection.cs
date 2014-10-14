@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using TelegramApi.TLCore;
@@ -11,14 +12,14 @@ namespace TelegramApi.MTProto.Connection
     public class PlainConnection : IPlainConnection, IDisposable
     {
         private readonly IConnectionInfo _connectionInfo;
-        private readonly ITLSerializer _tlSerializer;
+        private readonly ITLObjectDeserializer _objectDeserializer;
         private TcpClient _tcpClient;
         private bool _efSent;
 
-        public PlainConnection(IConnectionInfo connectionInfo, ITLSerializer tlSerializer)
+        public PlainConnection(IConnectionInfo connectionInfo, ITLObjectDeserializer objectDeserializer)
         {
             _connectionInfo = connectionInfo;
-            _tlSerializer = tlSerializer;
+            _objectDeserializer = objectDeserializer;
             _tcpClient = new TcpClient();
         }
 
@@ -46,7 +47,7 @@ namespace TelegramApi.MTProto.Connection
             byte[] recvArr = new byte[headerLen];
             await _tcpClient.GetStream().ReadAsync(recvArr, 0, headerLen);
 
-            method.ReceiveObject = _tlSerializer.Deserialize<TRecv>(recvArr);
+            method.ReceiveObject = _objectDeserializer.Deserialize<TRecv>(recvArr.ToList());
 
             return method.ReceiveObject;
         }
@@ -55,7 +56,7 @@ namespace TelegramApi.MTProto.Connection
             where T : TLObject, new()
         {
             List<byte> packet = new List<byte>();
-            byte[] objArr = _tlSerializer.Serialize(obj);
+            byte[] objArr = _objectDeserializer.Serialize(obj, null).ToArray();
             byte len = (byte)(objArr.Length / 4);
 
             if (!_efSent)

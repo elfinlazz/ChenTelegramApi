@@ -78,7 +78,7 @@ namespace TelegramApi.TLCoreTest.Extensions
             result.ShouldBeEquivalentTo(Expected);
             list.Count.ShouldBeEquivalentTo(1);
         }
-        
+
         [Test]
         public void ReadInt32_ThenInt16Read()
         {

@@ -15,7 +15,8 @@ namespace TelegramApi.TLCoreTest
             List<byte> byteList = new List<byte>
                 {
                     0x02,
-                    0xEF, 0x3F,
+                    0xEF,
+                    0x3F,
                     0x00
                 };
 

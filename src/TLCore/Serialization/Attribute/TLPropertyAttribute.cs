@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace TelegramApi.TLCore.Serialization
+namespace TelegramApi.TLCore.Serialization.Attribute
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class TLPropertyAttribute : Attribute
+    public class TLPropertyAttribute : System.Attribute
     {
         public TLPropertyAttribute()
         {

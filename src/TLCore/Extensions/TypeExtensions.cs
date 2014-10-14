@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using TelegramApi.TLCore.Serialization;
+using TelegramApi.TLCore.Serialization.Attribute;
 
 namespace TelegramApi.TLCore.Extensions
 {

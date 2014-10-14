@@ -1,5 +1,6 @@
 ﻿using System;
 using TelegramApi.TLCore.Serialization;
+using TelegramApi.TLCore.Serialization.Attribute;
 
 namespace TelegramApi.TLCore.Authorization
 {

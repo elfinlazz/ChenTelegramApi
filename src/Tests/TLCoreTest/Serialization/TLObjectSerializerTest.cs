@@ -1,19 +1,21 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 using TelegramApi.TLCore;
 using TelegramApi.TLCore.Authorization;
+using TelegramApi.TLCore.Kernel;
 using TelegramApi.TLCore.Serialization;
 
 namespace TelegramApi.TLCoreTest.Serialization
 {
-    public class TLSerializerTest
+    public class TLObjectSerializerTest
     {
-        private TLSerializer _testee;
+        private TLObjectSerializer _testee;
 
         [SetUp]
         public void SetUp()
         {
-            _testee = new TLSerializer();
+            _testee = new TLObjectSerializer(CoreKernel.Get<ITLSerializerFactory>());
         }
 
         [Test]
@@ -46,7 +48,7 @@ namespace TelegramApi.TLCoreTest.Serialization
                 };
 
             // act
-            byte[] result = _testee.Serialize(reqPq);
+            byte[] result = _testee.Serialize(reqPq, null).ToArray();
 
             // assert
             result.ShouldBeEquivalentTo(expectedBytes);
@@ -82,7 +84,7 @@ namespace TelegramApi.TLCoreTest.Serialization
                 };
 
             // act
-            TLFrame<ReqPq> result = _testee.Deserialize<TLFrame<ReqPq>>(bytes);
+            TLFrame<ReqPq> result = _testee.Deserialize<TLFrame<ReqPq>>(bytes.ToList());
 
             // assert
             result.ShouldBeEquivalentTo(expectedFrame);
