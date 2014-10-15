@@ -54,6 +54,7 @@
     <Compile Include="Extensions\DateTimeExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\Serializer\TLBytesSerializerTest.cs" />
+    <Compile Include="Serialization\Serializer\TLInt32SerializerTest.cs" />
     <Compile Include="Serialization\TLObjectSerializerTest.cs" />
   </ItemGroup>
   <ItemGroup>
