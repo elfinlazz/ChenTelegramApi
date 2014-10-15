@@ -46,8 +46,8 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
         public void Serialize_ThenInt64Returned()
         {
             //arrange
-            byte[] expected = { 0x02, 0xEF, 0x3F, 0x01, 0xAB, 0x00, 0x00, 0x00 };
-            const Int64 Value = 0x00AB013FEF02;
+            byte[] expected = { 0x02, 0xEF, 0x3F, 0x01, 0xAB, 0xCD, 0x06, 0x00 };
+            const Int64 Value = 0x006CDAB013FEF02;
 
             //act
             List<byte> result = _testee.Serialize(Value, null);
