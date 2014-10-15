@@ -21,7 +21,7 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
         public void Deserialize_ThenInt64Deserialize()
         {
             //arrange
-            const Int64 Expected = 0x00AB013FEF02;
+            const Int64 Expected = 0x006CDAB013FEF02;
             List<byte> byteList = new List<byte>
             {
                 0x02,
@@ -29,8 +29,8 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
                 0x3F,
                 0x01,
                 0xAB,
-                0x00,
-                0x00,
+                0xCD,
+                0x06,
                 0x00
             };
 
