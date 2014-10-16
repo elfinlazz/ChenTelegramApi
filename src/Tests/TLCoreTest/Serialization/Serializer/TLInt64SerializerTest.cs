@@ -8,7 +8,6 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
 {
     public class TLInt64SerializerTest
     {
-
         private TLInt64Serializer _testee;
 
         [SetUp]
@@ -20,24 +19,24 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
         [Test]
         public void Deserialize_ThenInt64Deserialize()
         {
-            //arrange
+            // arrange
             const Int64 Expected = 0x100E0C0A08060402;
             List<byte> byteList = new List<byte>
-            {
-                0x02,
-                0x04,
-                0x06,
-                0x08,
-                0x0A,
-                0x0C,
-                0x0E,
-                0x10
-            };
+                {
+                    0x02,
+                    0x04,
+                    0x06,
+                    0x08,
+                    0x0A,
+                    0x0C,
+                    0x0E,
+                    0x10
+                };
 
-            //act
-            Int64 result = (Int64) _testee.Deserialize(byteList, null);
+            // act
+            Int64 result = (Int64)_testee.Deserialize(byteList, null);
 
-            //assert
+            // assert
             result.ShouldBeEquivalentTo(Expected);
             byteList.Count.ShouldBeEquivalentTo(0);
         }
@@ -45,16 +44,15 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
         [Test]
         public void Serialize_ThenInt64Returned()
         {
-            //arrange
+            // arrange
             byte[] expected = { 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0E, 0x10 };
             const Int64 Value = 0x100E0C0A08060402;
 
-            //act
+            // act
             List<byte> result = _testee.Serialize(Value, null);
 
-            //assert
+            // assert
             result.ShouldBeEquivalentTo(expected);
         }
-
     }
 }
