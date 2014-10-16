@@ -21,7 +21,7 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
         }
 
         [Test]
-        public void Deserialize_ThenInt32Deserialized()
+        public void Deserialize_ThenByteArrayDeserialized()
         {
             // arrange
             byte[] expected =
@@ -47,7 +47,7 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
         }
 
         [Test]
-        public void Serialize_ThenInt32Returned()
+        public void Serialize_ThenByteListReturned()
         {
             // arrange
             List<byte> expected = new List<byte>
