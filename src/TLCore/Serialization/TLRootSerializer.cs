@@ -25,7 +25,7 @@ namespace TelegramApi.TLCore.Serialization
             return SerializerDictionary[type].Serialize(value, attribute);
         }
 
-        public static object Deserialize(List<byte> byteList, Type type, TLPropertyAttribute attribute)
+        public static object Deserialize(List<byte> byteList, Type type, TLPropertyAttribute attribute = null)
         {
             if (type.BaseType == typeof(TLObject))
                 return TLObjectSerializer.Deserialize(byteList, type);
@@ -39,7 +39,7 @@ namespace TelegramApi.TLCore.Serialization
         public static T Deserialize<T>(List<byte> list)
             where T : TLObject, new()
         {
-            return (T)Deserialize(list, typeof(T), null);
+            return (T)Deserialize(list, typeof(T));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using TelegramApi.TLCore.Extensions;
 using TelegramApi.TLCore.Serialization.Attribute;
 
@@ -29,18 +28,16 @@ namespace TelegramApi.TLCore.Serialization.Serializer
         public override object Deserialize(List<byte> byteList, TLPropertyAttribute attribute)
         {
             int expectedClassId = GetSerializerType().GetClassId();
-            int classId = BitConverter.ToInt32(byteList.Take(4).ToArray(), 0);
+            int classId = (int)TLRootSerializer.Deserialize(byteList, typeof(Int32));
             if (expectedClassId != classId)
                 throw new NotSupportedException(expectedClassId + " =/= " + classId);
-            byteList.RemoveRange(0, 4);
 
             dynamic vector = Activator.CreateInstance(typeof(TLVector<>).MakeGenericType(attribute.VectorType));
 
-            int len = BitConverter.ToInt32(byteList.Take(4).ToArray(), 0);
-            byteList.RemoveRange(0, 4);
+            int len = (int)TLRootSerializer.Deserialize(byteList, typeof(Int32));
 
             for (int i = 0; i < len; i++)
-                vector.Content.Add((dynamic)TLRootSerializer.Deserialize(byteList, attribute.VectorType, null));
+                vector.Content.Add((dynamic)TLRootSerializer.Deserialize(byteList, attribute.VectorType));
 
             return vector;
         }

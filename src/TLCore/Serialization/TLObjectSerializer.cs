@@ -22,10 +22,9 @@ namespace TelegramApi.TLCore.Serialization
             int expectedClassId = type.GetClassId();
             if (expectedClassId != -1)
             {
-                int classId = BitConverter.ToInt32(byteList.Take(4).ToArray(), 0);
+                int classId = (int)TLRootSerializer.Deserialize(byteList, typeof(Int32));
                 if (expectedClassId != classId)
                     throw new NotSupportedException(expectedClassId + " =/= " + classId);
-                byteList.RemoveRange(0, 4);
             }
 
             type.GetTLProperties()
@@ -46,7 +45,7 @@ namespace TelegramApi.TLCore.Serialization
 
             int classId = obj.GetClassId();
             if (classId != -1)
-                list.InsertRange(0, BitConverter.GetBytes(classId));
+                list.InsertRange(0, TLRootSerializer.Serialize(classId));
 
             return list.ToArray();
         }

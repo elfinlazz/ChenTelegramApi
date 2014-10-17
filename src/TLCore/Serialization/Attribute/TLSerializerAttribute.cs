@@ -10,6 +10,6 @@ namespace TelegramApi.TLCore.Serialization.Attribute
             Type = type;
         }
 
-        public Type Type { get; set; }
+        public Type Type { get; private set; }
     }
 }
