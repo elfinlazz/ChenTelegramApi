@@ -52,6 +52,7 @@
     <Compile Include="Serialization\Serializer\TLBytesSerializer.cs" />
     <Compile Include="Serialization\Serializer\TLInt32Serializer.cs" />
     <Compile Include="Serialization\Serializer\TLInt64Serializer.cs" />
+    <Compile Include="Serialization\Serializer\TLVectorSerializer.cs" />
     <Compile Include="Serialization\TLRootSerializer.cs" />
     <Compile Include="Serialization\TLTypeSerializerBase.cs" />
     <Compile Include="Serialization\Attribute\TLSerializerAttribute.cs" />

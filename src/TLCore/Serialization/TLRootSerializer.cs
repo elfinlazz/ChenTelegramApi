@@ -30,6 +30,9 @@ namespace TelegramApi.TLCore.Serialization
             if (type.BaseType == typeof(TLObject))
                 return TLObjectSerializer.Deserialize(byteList, type);
 
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(TLVector<>))
+                type = typeof(TLVector<>);
+
             return SerializerDictionary[type].Deserialize(byteList, attribute);
         }
 
