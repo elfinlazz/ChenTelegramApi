@@ -83,7 +83,7 @@ namespace TelegramApi.TLCoreTest.Serialization
                 };
 
             // act
-            TLFrame<ReqPq> result = _testee.Deserialize<TLFrame<ReqPq>>(bytes.ToList());
+            TLFrame<ReqPq> result = TLObjectSerializer.Deserialize<TLFrame<ReqPq>>(bytes.ToList());
 
             // assert
             result.ShouldBeEquivalentTo(expectedFrame);

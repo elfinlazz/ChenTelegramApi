@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using FluentAssertions;
 using NUnit.Framework;
 using TelegramApi.TLCore.Serialization.Attribute;
@@ -10,9 +9,6 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
     public class TLByteArraySerializerTest
     {
         private TLByteArraySerializer _testee;
-
-        [TLProperty(4)]
-        public byte[] TestProperty { get; set; }
 
         [SetUp]
         public void SetUp()
@@ -39,7 +35,7 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
                 };
 
             // act
-            byte[] result = (byte[])_testee.Deserialize(byteList, GetType().GetProperty("TestProperty", BindingFlags.Public | BindingFlags.Instance));
+            byte[] result = (byte[])_testee.Deserialize(byteList, new TLPropertyAttribute(4));
 
             // assert
             result.ShouldBeEquivalentTo(expected);

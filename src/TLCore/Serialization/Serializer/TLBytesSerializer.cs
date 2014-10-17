@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using TelegramApi.TLCore.Extensions;
 using TelegramApi.TLCore.Serialization.Attribute;
 
@@ -9,7 +9,7 @@ namespace TelegramApi.TLCore.Serialization.Serializer
     [TLSerializer(typeof(TLBytes))]
     public class TLBytesSerializer : TLTypeSerializerBase
     {
-        public override byte[] Serialize(object input, PropertyInfo propertyInfo)
+        public override byte[] Serialize(object input, TLPropertyAttribute attribute)
         {
             TLBytes bytes = (TLBytes)input;
             int len = bytes.Content.Length;
@@ -42,7 +42,7 @@ namespace TelegramApi.TLCore.Serialization.Serializer
             return list.ToArray();
         }
 
-        public override object Deserialize(List<byte> byteList, PropertyInfo propertyInfo)
+        public override object Deserialize(List<byte> byteList, TLPropertyAttribute attribute)
         {
             int count = byteList.ReadByte();
             int startOffset = 1;

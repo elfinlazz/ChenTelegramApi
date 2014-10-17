@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
+using TelegramApi.TLCore.Serialization.Attribute;
 
 namespace TelegramApi.TLCore.Serialization
 {
     public interface ITLTypeSerializer
     {
-        byte[] Serialize(object input, PropertyInfo propertyInfo);
+        byte[] Serialize(object input, TLPropertyAttribute attribute);
 
-        object Deserialize(List<byte> byteList, PropertyInfo propertyInfo);
+        object Deserialize(List<byte> byteList, TLPropertyAttribute attribute);
 
         Type GetSerializerType();
     }
