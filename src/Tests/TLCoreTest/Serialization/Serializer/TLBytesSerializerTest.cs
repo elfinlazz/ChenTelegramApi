@@ -45,7 +45,7 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
             TLBytes bytes = new TLBytes(new byte[] { 0xEF, 0x3F });
 
             // act
-            List<byte> result = _testee.Serialize(bytes, null);
+            byte[] result = _testee.Serialize(bytes, null);
 
             // assert
             result.ShouldBeEquivalentTo(expected);

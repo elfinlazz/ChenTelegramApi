@@ -8,9 +8,9 @@ namespace TelegramApi.TLCore.Serialization.Serializer
     [TLSerializer(typeof(byte[]))]
     public class TLByteArraySerializer : TLTypeSerializerBase
     {
-        public override List<byte> Serialize(object input, PropertyInfo propertyInfo)
+        public override byte[] Serialize(object input, PropertyInfo propertyInfo)
         {
-            return ((byte[])input).ToList();
+            return (byte[])input;
         }
 
         public override object Deserialize(List<byte> byteList, PropertyInfo propertyInfo)

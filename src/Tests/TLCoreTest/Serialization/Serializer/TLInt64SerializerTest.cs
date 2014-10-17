@@ -49,7 +49,7 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
             const Int64 Value = 0x100E0C0A08060402;
 
             // act
-            List<byte> result = _testee.Serialize(Value, null);
+            byte[] result = _testee.Serialize(Value, null);
 
             // assert
             result.ShouldBeEquivalentTo(expected);

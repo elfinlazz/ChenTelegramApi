@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TelegramApi.TLCore
+﻿namespace TelegramApi.TLCore
 {
     public class TLBytes
     {

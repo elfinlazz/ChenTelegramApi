@@ -6,7 +6,7 @@ namespace TelegramApi.TLCore.Serialization
 {
     public interface ITLTypeSerializer
     {
-        List<byte> Serialize(object input, PropertyInfo propertyInfo);
+        byte[] Serialize(object input, PropertyInfo propertyInfo);
 
         object Deserialize(List<byte> byteList, PropertyInfo propertyInfo);
 

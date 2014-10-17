@@ -65,7 +65,7 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
                 };
 
             // act
-            List<byte> result = _testee.Serialize(byteArr, null);
+            byte[] result = _testee.Serialize(byteArr, null);
 
             // assert
             result.ShouldBeEquivalentTo(expected);

@@ -12,10 +12,7 @@ namespace TelegramApi.TLCore.Kernel
     {
         public override void Load()
         {
-            Bind<ITLObjectDeserializer>().To<TLObjectSerializer>().InSingletonScope();
-            Bind<ITLSerializerFactory>().To<TLSerializerFactory>().InSingletonScope();
-
-            foreach (Type serializerType in Assembly.GetAssembly(typeof(TLSerializerFactory))
+            foreach (Type serializerType in Assembly.GetAssembly(typeof(TLRootSerializer))
                 .GetTypes()
                 .Where(x => x.HasAttribute<TLSerializerAttribute>()))
             {

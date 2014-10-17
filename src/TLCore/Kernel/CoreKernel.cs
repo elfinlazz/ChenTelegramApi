@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Ninject;
 
 namespace TelegramApi.TLCore.Kernel
@@ -23,6 +24,11 @@ namespace TelegramApi.TLCore.Kernel
         public static T Get<T>()
         {
             return Instance._kernel.Get<T>();
+        }
+
+        public static IEnumerable<T> GetAll<T>()
+        {
+            return Instance._kernel.GetAll<T>();
         }
 
         public void Dispose()

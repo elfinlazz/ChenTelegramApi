@@ -47,14 +47,13 @@
     <Compile Include="Authorization\ReqPq.cs" />
     <Compile Include="Authorization\ResPq.cs" />
     <Compile Include="Kernel\SerializerModule.cs" />
-    <Compile Include="Serialization\ITLSerializerFactory.cs" />
     <Compile Include="Serialization\ITLTypeSerializer.cs" />
     <Compile Include="Serialization\Serializer\TLByteArraySerializer.cs" />
     <Compile Include="Serialization\Serializer\TLBytesSerializer.cs" />
     <Compile Include="Serialization\Serializer\TLInt32Serializer.cs" />
     <Compile Include="Serialization\Serializer\TLInt64Serializer.cs" />
+    <Compile Include="Serialization\TLRootSerializer.cs" />
     <Compile Include="Serialization\TLTypeSerializerBase.cs" />
-    <Compile Include="Serialization\TLSerializerFactory.cs" />
     <Compile Include="Serialization\Attribute\TLSerializerAttribute.cs" />
     <Compile Include="TLBytes.cs" />
     <Compile Include="Authorization\TLReqPqMethod.cs" />
@@ -62,7 +61,6 @@
     <Compile Include="TLVector.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Serialization\ITLObjectDeserializer.cs" />
     <Compile Include="TLMethod.cs" />
     <Compile Include="TLFrame.cs" />
     <Compile Include="TLObject.cs" />

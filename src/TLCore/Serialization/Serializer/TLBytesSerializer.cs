@@ -9,7 +9,7 @@ namespace TelegramApi.TLCore.Serialization.Serializer
     [TLSerializer(typeof(TLBytes))]
     public class TLBytesSerializer : TLTypeSerializerBase
     {
-        public override List<byte> Serialize(object input, PropertyInfo propertyInfo)
+        public override byte[] Serialize(object input, PropertyInfo propertyInfo)
         {
             TLBytes bytes = (TLBytes)input;
             int len = bytes.Content.Length;
@@ -39,7 +39,7 @@ namespace TelegramApi.TLCore.Serialization.Serializer
                 list.AddRange(Enumerable.Repeat((byte)0x00, offsetCount));
             }
 
-            return list;
+            return list.ToArray();
         }
 
         public override object Deserialize(List<byte> byteList, PropertyInfo propertyInfo)

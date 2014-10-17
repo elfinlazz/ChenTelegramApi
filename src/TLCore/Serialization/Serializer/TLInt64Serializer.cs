@@ -9,9 +9,9 @@ namespace TelegramApi.TLCore.Serialization.Serializer
     [TLSerializer(typeof(Int64))]
     public class TLInt64Serializer : TLTypeSerializerBase
     {
-        public override List<byte> Serialize(object input, PropertyInfo propertyInfo)
+        public override byte[] Serialize(object input, PropertyInfo propertyInfo)
         {
-            return BitConverter.GetBytes((Int64)input).ToList();
+            return BitConverter.GetBytes((Int64)input);
         }
 
         public override object Deserialize(List<byte> byteList, PropertyInfo propertyInfo)

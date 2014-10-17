@@ -3,7 +3,6 @@ using FluentAssertions;
 using NUnit.Framework;
 using TelegramApi.TLCore;
 using TelegramApi.TLCore.Authorization;
-using TelegramApi.TLCore.Kernel;
 using TelegramApi.TLCore.Serialization;
 
 namespace TelegramApi.TLCoreTest.Serialization
@@ -15,7 +14,7 @@ namespace TelegramApi.TLCoreTest.Serialization
         [SetUp]
         public void SetUp()
         {
-            _testee = new TLObjectSerializer(CoreKernel.Get<ITLSerializerFactory>());
+            _testee = new TLObjectSerializer();
         }
 
         [Test]

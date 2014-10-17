@@ -6,21 +6,14 @@ using TelegramApi.TLCore.Extensions;
 
 namespace TelegramApi.TLCore.Serialization
 {
-    public class TLObjectSerializer : TLTypeSerializerBase, ITLObjectDeserializer
+    public class TLObjectSerializer : TLTypeSerializerBase
     {
-        private readonly ITLSerializerFactory _serializerFactory;
-
-        public TLObjectSerializer(ITLSerializerFactory serializerFactory)
-        {
-            _serializerFactory = serializerFactory;
-        }
-
-        public override List<byte> Serialize(object input, PropertyInfo propertyInfo)
+        public override byte[] Serialize(object input, PropertyInfo propertyInfo)
         {
             TLObject obj = (TLObject)input;
 
             List<byte> list = obj.GetTLProperties()
-                .Select(x => SerializeProperty(x, obj))
+                .Select(x => TLRootSerializer.Serialize(x.GetValue(obj), propertyInfo))
                 .SelectMany(x => x)
                 .ToList();
 
@@ -28,13 +21,7 @@ namespace TelegramApi.TLCore.Serialization
             if (classId != -1)
                 list.InsertRange(0, BitConverter.GetBytes(classId));
 
-            return list;
-        }
-
-        private byte[] SerializeProperty(PropertyInfo propertyInfo, TLObject tlObject)
-        {
-            return _serializerFactory.GetSerializer(propertyInfo.PropertyType)
-                .Serialize(propertyInfo.GetValue(tlObject), propertyInfo).ToArray();
+            return list.ToArray();
         }
 
         public T Deserialize<T>(List<byte> byteList)
@@ -63,21 +50,9 @@ namespace TelegramApi.TLCore.Serialization
 
             type.GetTLProperties()
                 .ToList()
-                .ForEach(x => DeserializeProperty(x, byteList, obj));
+                .ForEach(x => x.SetValue(obj, TLRootSerializer.Deserialize(byteList, x)));
 
             return obj;
-        }
-
-        private void DeserializeProperty(PropertyInfo propertyInfo, List<byte> byteList, object obj)
-        {
-            object value;
-            if (propertyInfo.PropertyType.BaseType == typeof(TLObject))
-                value = Deserialize(byteList, propertyInfo.PropertyType);
-            else
-                value = _serializerFactory.GetSerializer(propertyInfo.PropertyType)
-                    .Deserialize(byteList, propertyInfo);
-
-            propertyInfo.SetValue(obj, value);
         }
     }
 }
