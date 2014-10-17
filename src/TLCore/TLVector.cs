@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TelegramApi.TLCore.Serialization;
+using TelegramApi.TLCore.Serialization.Attribute;
 
 namespace TelegramApi.TLCore
 {

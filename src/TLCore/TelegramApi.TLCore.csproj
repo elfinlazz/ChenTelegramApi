@@ -66,7 +66,7 @@
     <Compile Include="TLObject.cs" />
     <Compile Include="Extensions\ByteListExtensions.cs" />
     <Compile Include="Serialization\Attribute\TLPropertyAttribute.cs" />
-    <Compile Include="Serialization\TLClassIdAttribute.cs" />
+    <Compile Include="Serialization\Attribute\TLClassIdAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\TLObjectSerializer.cs" />
   </ItemGroup>
