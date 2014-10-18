@@ -5,11 +5,11 @@ namespace TelegramApi.TLCore.Serialization.Attribute
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class TLClassIdAttribute : System.Attribute
     {
-        public TLClassIdAttribute(long classId)
+        public TLClassIdAttribute(uint classId)
         {
             ClassId = classId;
         }
 
-        public long ClassId { get; private set; }
+        public uint ClassId { get; private set; }
     }
 }
