@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using TelegramApi.TLCore.Extensions;
 
@@ -11,7 +12,7 @@ namespace TelegramApi.TLCore
             return GetType().GetTLProperties();
         }
 
-        public int GetClassId()
+        public UInt32 GetClassId()
         {
             return GetType().GetClassId();
         }

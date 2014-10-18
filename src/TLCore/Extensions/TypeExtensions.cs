@@ -13,10 +13,10 @@ namespace TelegramApi.TLCore.Extensions
             return type.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(propInfo => propInfo.GetCustomAttribute<TLPropertyAttribute>() != null);
         }
 
-        public static int GetClassId(this Type type)
+        public static UInt32 GetClassId(this Type type)
         {
             TLClassIdAttribute attr = type.GetCustomAttribute<TLClassIdAttribute>();
-            return attr == null ? -1 : attr.ClassId;
+            return attr == null ? 0 : attr.ClassId;
         }
     }
 }

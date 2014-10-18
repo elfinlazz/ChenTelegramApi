@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorization\PqInnerData.cs" />
     <Compile Include="Authorization\ReqPq.cs" />
     <Compile Include="Authorization\ResPq.cs" />
     <Compile Include="Kernel\SerializerModule.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Serialization\Serializer\TLBytesSerializer.cs" />
     <Compile Include="Serialization\Serializer\TLInt32Serializer.cs" />
     <Compile Include="Serialization\Serializer\TLInt64Serializer.cs" />
+    <Compile Include="Serialization\Serializer\TLUInt32Serializer.cs" />
     <Compile Include="Serialization\Serializer\TLVectorSerializer.cs" />
     <Compile Include="Serialization\TLRootSerializer.cs" />
     <Compile Include="Serialization\TLTypeSerializerBase.cs" />

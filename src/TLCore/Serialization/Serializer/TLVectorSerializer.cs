@@ -12,7 +12,7 @@ namespace TelegramApi.TLCore.Serialization.Serializer
         {
             dynamic vector = input;
 
-            int classId = GetSerializerType().GetClassId();
+            UInt32 classId = GetSerializerType().GetClassId();
             int len = vector.Content.Count;
 
             List<byte> byteList = new List<byte>();
@@ -27,8 +27,8 @@ namespace TelegramApi.TLCore.Serialization.Serializer
 
         public override object Deserialize(List<byte> byteList, TLPropertyAttribute attribute)
         {
-            int expectedClassId = GetSerializerType().GetClassId();
-            int classId = (int)TLRootSerializer.Deserialize(byteList, typeof(Int32));
+            UInt32 expectedClassId = GetSerializerType().GetClassId();
+            UInt32 classId = (UInt32)TLRootSerializer.Deserialize(byteList, typeof(UInt32));
             if (expectedClassId != classId)
                 throw new NotSupportedException(expectedClassId + " =/= " + classId);
 
