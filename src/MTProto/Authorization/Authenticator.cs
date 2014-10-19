@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TelegramApi.MTProto.Connection;
 using TelegramApi.TLCore;
 using TelegramApi.TLCore.Authorization;
 using TelegramApi.TLCore.Extensions;
+using TelegramApi.TLCore.Serialization;
 
 namespace TelegramApi.MTProto.Authorization
 {
     public class Authenticator
     {
         private readonly IList<IConnectionInfo> _connectionInfoList;
+        private readonly IPqSolver _pqSolver;
 
-        public Authenticator(IList<IConnectionInfo> connectionInfoList)
+        public Authenticator(IList<IConnectionInfo> connectionInfoList, IPqSolver pqSolver)
         {
             _connectionInfoList = connectionInfoList;
+            _pqSolver = pqSolver;
         }
 
         public async Task AttemptAuthentication()
@@ -40,7 +44,10 @@ namespace TelegramApi.MTProto.Authorization
                 };
 
             method.SendObject = frame;
+
             TLFrame<ResPq> result = await connection.ExecuteMethodAsync(method);
+            UInt64 pq = (UInt64)TLRootSerializer.Deserialize(result.Content.Pq.Content.Reverse().ToList(), typeof(UInt64));
+            PqData pqData = _pqSolver.SolvePq(pq);
         }
     }
 }

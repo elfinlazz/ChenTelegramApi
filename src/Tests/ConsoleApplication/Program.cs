@@ -9,7 +9,7 @@ namespace TelegramApi.ConsoleApplication
         public static void Main(string[] args)
         {
             IConnectionInfo connectionInfo = new ConnectionInfo("173.240.5.253", 25);
-            Authenticator authenticator = new Authenticator(new[] { connectionInfo });
+            Authenticator authenticator = new Authenticator(new[] { connectionInfo }, new PqLopatinSolver());
             Task attempt = authenticator.AttemptAuthentication();
             attempt.Wait();
         }

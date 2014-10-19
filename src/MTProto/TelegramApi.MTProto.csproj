@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorization\Authenticator.cs" />
+    <Compile Include="Authorization\IPqSolver.cs" />
+    <Compile Include="Authorization\PqData.cs" />
+    <Compile Include="Authorization\PqLopatinSolver.cs" />
     <Compile Include="Connection\ConnectionInfo.cs" />
     <Compile Include="Connection\IConnectionInfo.cs" />
     <Compile Include="Connection\IPlainConnection.cs" />
