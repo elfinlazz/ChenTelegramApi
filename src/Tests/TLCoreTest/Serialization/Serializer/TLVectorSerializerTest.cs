@@ -35,7 +35,7 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
                 };
 
             // act
-            TLVector<Int64> result = (TLVector<Int64>)_testee.Deserialize(bytes.ToList(), new TLPropertyAttribute { VectorType = typeof(Int64) });
+            TLVector<Int64> result = (TLVector<Int64>)_testee.Deserialize(bytes.ToList(), new TLPropertyAttribute(0) { VectorType = typeof(Int64) });
 
             // assert
             result.ShouldBeEquivalentTo(expected);
@@ -58,7 +58,7 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
                 };
 
             // act
-            byte[] result = _testee.Serialize(vector, new TLPropertyAttribute { VectorType = typeof(Int32) });
+            byte[] result = _testee.Serialize(vector, new TLPropertyAttribute(0) { VectorType = typeof(Int32) });
 
             // act
             result.ShouldBeEquivalentTo(expected);

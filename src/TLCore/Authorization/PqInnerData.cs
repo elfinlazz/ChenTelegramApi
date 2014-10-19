@@ -5,19 +5,22 @@ namespace TelegramApi.TLCore.Authorization
     [TLClassId(0x83c95aec)]
     public class PqInnerData : TLObject
     {
-        [TLProperty]
-        public byte[] Pq { get; set; }
+        [TLProperty(0)]
+        public TLBytes Pq { get; set; }
 
-        [TLProperty]
-        public byte[] P { get; set; }
+        [TLProperty(1)]
+        public TLBytes P { get; set; }
 
-        [TLProperty(ArrayLength = 16)]
+        [TLProperty(2)]
+        public TLBytes Q { get; set; }
+
+        [TLProperty(3, ArrayLength = 16)]
         public byte[] Nonce { get; set; }
 
-        [TLProperty(ArrayLength = 16)]
+        [TLProperty(4, ArrayLength = 16)]
         public byte[] ServerNonce { get; set; }
 
-        [TLProperty(ArrayLength = 32)]
+        [TLProperty(5, ArrayLength = 32)]
         public byte[] NewNonce { get; set; }
     }
 }

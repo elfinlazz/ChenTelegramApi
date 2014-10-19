@@ -10,13 +10,20 @@ namespace TelegramApi.TLCore.Extensions
     {
         public static IEnumerable<PropertyInfo> GetTLProperties(this Type type)
         {
-            return type.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(propInfo => propInfo.GetCustomAttribute<TLPropertyAttribute>() != null);
+            return type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(propInfo => propInfo.GetCustomAttribute<TLPropertyAttribute>() != null)
+                .OrderBy(propInfo => propInfo.GetCustomAttribute<TLPropertyAttribute>().Order);
         }
 
         public static UInt32 GetClassId(this Type type)
         {
             TLClassIdAttribute attr = type.GetCustomAttribute<TLClassIdAttribute>();
             return attr == null ? 0 : attr.ClassId;
+        }
+
+        public static Type GetSubTypeWithClassId(this Type type, UInt32 classId)
+        {
+            return type.Assembly.GetTypes().Where(x => x.IsSubclassOf(type)).Single(x => x.GetClassId() == classId);
         }
     }
 }

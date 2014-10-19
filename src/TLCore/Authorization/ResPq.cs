@@ -6,16 +6,16 @@ namespace TelegramApi.TLCore.Authorization
     [TLClassId(0x05162463)]
     public class ResPq : TLObject
     {
-        [TLProperty(ArrayLength = 16)]
+        [TLProperty(0, ArrayLength = 16)]
         public byte[] Nonce { get; set; }
 
-        [TLProperty(ArrayLength = 16)]
+        [TLProperty(1, ArrayLength = 16)]
         public byte[] ServerNonce { get; set; }
 
-        [TLProperty]
+        [TLProperty(2)]
         public TLBytes Pq { get; set; }
 
-        [TLProperty(VectorType = typeof(Int64))]
-        public TLVector<Int64> Vector { get; set; }
+        [TLProperty(3, VectorType = typeof(UInt64))]
+        public TLVector<UInt64> Vector { get; set; }
     }
 }

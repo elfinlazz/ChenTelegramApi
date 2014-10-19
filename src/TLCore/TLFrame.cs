@@ -5,16 +5,16 @@ namespace TelegramApi.TLCore
 {
     public class TLFrame<T> : TLObject
     {
-        [TLProperty]
+        [TLProperty(0)]
         public Int64 AuthKey { get; set; }
 
-        [TLProperty]
+        [TLProperty(1)]
         public Int64 MessageId { get; set; }
 
-        [TLProperty]
+        [TLProperty(2)]
         public Int32 MessageLength { get; set; }
 
-        [TLProperty]
+        [TLProperty(3)]
         public T Content { get; set; }
     }
 }

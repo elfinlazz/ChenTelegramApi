@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using TelegramApi.MTProto.Utils;
 using TelegramApi.TLCore;
 using TelegramApi.TLCore.Serialization;
 
@@ -41,8 +42,11 @@ namespace TelegramApi.MTProto.Connection
             }
             headerLen *= 4;
 
+            Console.WriteLine("....receiving....");
             byte[] recvArr = new byte[headerLen];
             await _tcpClient.GetStream().ReadAsync(recvArr, 0, headerLen);
+            DebugUtils.DumpBytes(recvArr);
+            Console.WriteLine("\n....done....");
 
             method.ReceiveObject = TLRootSerializer.Deserialize<TRecv>(recvArr.ToList());
 
@@ -76,7 +80,10 @@ namespace TelegramApi.MTProto.Connection
 
             packet.AddRange(objArr);
 
+            Console.WriteLine("....sending....");
+            DebugUtils.DumpBytes(packet.ToArray());
             await _tcpClient.GetStream().WriteAsync(packet.ToArray(), 0, packet.Count);
+            Console.WriteLine("\n....done....");
         }
 
         public void Dispose()

@@ -35,7 +35,7 @@ namespace TelegramApi.TLCoreTest.Serialization.Serializer
                 };
 
             // act
-            byte[] result = (byte[])_testee.Deserialize(byteList, new TLPropertyAttribute { ArrayLength = 4 });
+            byte[] result = (byte[])_testee.Deserialize(byteList, new TLPropertyAttribute(0) { ArrayLength = 4 });
 
             // assert
             result.ShouldBeEquivalentTo(expected);

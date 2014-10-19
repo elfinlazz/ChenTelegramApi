@@ -17,15 +17,20 @@ namespace TelegramApi.TLCore.Serialization
 
         public static object Deserialize(List<byte> byteList, Type type)
         {
-            object obj = Activator.CreateInstance(type);
-
             UInt32 expectedClassId = type.GetClassId();
-            if (expectedClassId != 0)
+            if (expectedClassId == 0xFFFFFFFF)
+            {
+                UInt32 classId = (UInt32)TLRootSerializer.Deserialize(byteList, typeof(UInt32));
+                type = type.GetSubTypeWithClassId(classId);
+            }
+            else if (expectedClassId != 0)
             {
                 UInt32 classId = (UInt32)TLRootSerializer.Deserialize(byteList, typeof(UInt32));
                 if (expectedClassId != classId)
                     throw new NotSupportedException(expectedClassId + " =/= " + classId);
             }
+
+            object obj = Activator.CreateInstance(type);
 
             type.GetTLProperties()
                 .ToList()
