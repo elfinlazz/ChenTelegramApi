@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
 
-namespace TelegramApi.MTProto.Data
+namespace TelegramApi.MTProto.Encryption
 {
     public static class ServerKeys
     {

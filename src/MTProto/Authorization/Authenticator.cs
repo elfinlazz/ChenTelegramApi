@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
+using System.Security;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Security;
 using TelegramApi.MTProto.Connection;
-using TelegramApi.MTProto.Data;
+using TelegramApi.MTProto.Encryption;
+using TelegramApi.MTProto.Utils;
 using TelegramApi.TLCore;
 using TelegramApi.TLCore.Authorization;
 using TelegramApi.TLCore.Extensions;
@@ -18,11 +19,16 @@ namespace TelegramApi.MTProto.Authorization
     {
         private readonly IList<IConnectionInfo> _connectionInfoList;
         private readonly IPqSolver _pqSolver;
+        private readonly IRsaCrypter _rsaCrypter;
 
-        public Authenticator(IList<IConnectionInfo> connectionInfoList, IPqSolver pqSolver)
+        public Authenticator(
+            IList<IConnectionInfo> connectionInfoList,
+            IPqSolver pqSolver,
+            IRsaCrypter rsaCrypter)
         {
             _connectionInfoList = connectionInfoList;
             _pqSolver = pqSolver;
+            _rsaCrypter = rsaCrypter;
         }
 
         public async Task AttemptAuthentication()
@@ -65,23 +71,16 @@ namespace TelegramApi.MTProto.Authorization
             r.NextBytes(innerData.NewNonce);
 
             byte[] data = TLRootSerializer.Serialize(innerData);
-            byte[] sha1;
 
             UInt64 fingerprint = resPqFrame.Content.Vector.Content.First();
-
-            using (SHA1 shaAlgo = SHA1.Create())
-            {
-                sha1 = shaAlgo.ComputeHash(data);
-            }
+            SHA1 shaAlgo = SHA1.Create();
+            byte[] sha1 = shaAlgo.ComputeHash(data);
 
             List<byte> dataWithHash = sha1.Concat(data).ToList();
             while (dataWithHash.Count < 255)
                 dataWithHash.Add((byte)(r.Next() & 0xFF));
 
-            IBufferedCipher cipher = CipherUtilities.GetCipher("RSA/ECB/NoPadding");
-            AsymmetricKeyParameter publicKey = ServerKeys.GetKey(fingerprint);
-            cipher.Init(true, publicKey);
-            byte[] encData = cipher.DoFinal(dataWithHash.ToArray());
+            byte[] encData = _rsaCrypter.EncryptBytes(dataWithHash.ToArray(), fingerprint);
 
             TLFrame<ReqDhParams> reqDhFrame = new TLFrame<ReqDhParams>
                 {
@@ -100,7 +99,32 @@ namespace TelegramApi.MTProto.Authorization
                 };
 
             TLReqDhParamsMethod reqDhMethod = new TLReqDhParamsMethod { SendObject = reqDhFrame };
-            TLFrame<ServerDhParams> res = await connection.ExecuteMethodAsync(reqDhMethod);
+            TLFrame<ServerDhParams> dhParamsFrame = await connection.ExecuteMethodAsync(reqDhMethod);
+
+            ServerDhParamsOk paramsOk = dhParamsFrame.Content as ServerDhParamsOk;
+            if (paramsOk == null)
+                throw new ServerException("Didn't receive ServerDhParamsOk(0xd0e8075c)");
+
+            // SHA1(new_nonce + server_nonce)
+            byte[] tmpAesKey = shaAlgo.ComputeHash(ArrayUtils.Concat(innerData.NewNonce, innerData.ServerNonce));
+            // + substr (SHA1(server_nonce + new_nonce), 0, 12)
+            tmpAesKey = tmpAesKey.Concat(shaAlgo.ComputeHash(ArrayUtils.Concat(innerData.ServerNonce, innerData.NewNonce)).Take(12).ToArray()).ToArray();
+
+            // substr (SHA1(server_nonce + new_nonce), 12, 8)
+            byte[] tmpAesIv = shaAlgo.ComputeHash(ArrayUtils.Concat(innerData.ServerNonce, innerData.NewNonce)).Skip(12).Take(8).ToArray();
+            // + SHA1(new_nonce + new_nonce)
+            tmpAesIv = tmpAesIv.Concat(shaAlgo.ComputeHash(ArrayUtils.Concat(innerData.NewNonce, innerData.NewNonce))).ToArray();
+            // + substr (new_nonce, 0, 4);
+            tmpAesIv = tmpAesIv.Concat(innerData.NewNonce.Take(4)).ToArray();
+
+            byte[] decData = _rsaCrypter.DecryptBytes(paramsOk.EncryptedAnswer.Content, tmpAesKey, tmpAesIv);
+            byte[] hash = decData.Take(20).ToArray();
+            decData = decData.Skip(20).ToArray();
+
+            ServerDhInnerData dhInnerData = TLRootSerializer.Deserialize<ServerDhInnerData>(decData.ToList());
+
+            if (!ArrayUtils.Equal(hash, shaAlgo.ComputeHash(TLRootSerializer.Serialize(dhInnerData))))
+                throw new SecurityException("SHA-1 hash not equal to ServerDhInnerData");
         }
     }
 }

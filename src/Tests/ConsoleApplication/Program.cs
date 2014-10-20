@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using TelegramApi.MTProto.Authorization;
 using TelegramApi.MTProto.Connection;
+using TelegramApi.MTProto.Encryption;
 
 namespace TelegramApi.ConsoleApplication
 {
@@ -8,8 +9,8 @@ namespace TelegramApi.ConsoleApplication
     {
         public static void Main(string[] args)
         {
-            IConnectionInfo connectionInfo = new ConnectionInfo("173.240.5.253", 25);
-            Authenticator authenticator = new Authenticator(new[] { connectionInfo }, new PqLopatinSolver());
+            IConnectionInfo connectionInfo = new ConnectionInfo("149.154.167.40", 443);
+            Authenticator authenticator = new Authenticator(new[] { connectionInfo }, new PqLopatinSolver(), new RsaCrypter());
             Task attempt = authenticator.AttemptAuthentication();
             attempt.Wait();
         }

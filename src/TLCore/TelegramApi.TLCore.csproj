@@ -48,6 +48,7 @@
     <Compile Include="Authorization\ReqDhParams.cs" />
     <Compile Include="Authorization\ReqPq.cs" />
     <Compile Include="Authorization\ResPq.cs" />
+    <Compile Include="Authorization\ServerDhInnerData.cs" />
     <Compile Include="Authorization\ServerDhParams.cs" />
     <Compile Include="Authorization\TLReqDhParamsMethod.cs" />
     <Compile Include="Kernel\SerializerModule.cs" />
