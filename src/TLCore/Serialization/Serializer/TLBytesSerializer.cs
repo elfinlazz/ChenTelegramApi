@@ -46,7 +46,7 @@ namespace TelegramApi.TLCore.Serialization.Serializer
             int count = byteList.ReadByte();
             int startOffset = 1;
 
-            if (count > 254)
+            if (count >= 254)
             {
                 count = byteList.ReadByte();
                 count += byteList.ReadByte() << 8;
