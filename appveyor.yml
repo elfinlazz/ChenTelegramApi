@@ -2,4 +2,4 @@
 # http://www.appveyor.com/docs/appveyor-yml
 
 before_build:
-  - nuget restore
+  - nuget restore src/TelegramApi.sln
